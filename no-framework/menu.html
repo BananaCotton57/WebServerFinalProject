@@ -12,6 +12,83 @@
 
         nav {
             background-color: darkgreen;
+            height: 40px;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: left;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .dropdown {
+            position: relative;
+            margin-right: 35px;
+            padding: 10px 15px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .dropdown:hover{
+            background-color: lightgreen;
+            z-index:1;
+        }
+
+        a {
+            text-decoration: none;
+            text-align: left;
+            display:block;
+        }
+
+        a:hover {
+            background-color: chartreuse;
+        }
+
+        a:active {
+            color:red;
+        }
+
+        .dropdown {
+            list-style-type: none;
+        }
+
+        .dropdown-content{
+            display: none;
+            list-style-type: none;
+            position: relative;
+            background-color: lightgreen;
+            z-index: 1;
+        }
+
+        .dropdown-content li a{
+            padding: 5px;
+            margin: 5px;
+        }
+
+        .dropdown:hover .dropdown-content{
+            display: block;
+            position: relative;
+        }
+
+        .info-box {
+            background-color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 5px;
+            width: 80%;
+            margin: auto;
+            position: relative;
+            top: 20px;
+            left: 35px;
+        }
+
+        #box1{
+            border-left: 10px solid lightgreen;
+        }
+
+        #box2{
+            border-left: 10px solid yellow;
+            position: relative;
+            top: 50px;
         }
 
 
@@ -20,7 +97,7 @@
     <body>
             <nav>
                 <ul>
-                 <li class="dropdown"><a href = "#">File</a> <!--File Dropdown-->
+                 <li class="dropdown"> <b>File</b> <!--File Dropdown-->
                     <ul class="dropdown-content">
                         <li><a href = "#">New</a></li>
                         <li><a href = "#">Open</a></li>
@@ -29,7 +106,7 @@
                         <li><a href = "#">Close</a></li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href = "#">Edit</a> <!--Edit Dropdown-->
+                <li class="dropdown"> Edit <!--Edit Dropdown-->
                     <ul class="dropdown-content">
                         <li><a href = "#">Undo</a></li>
                         <li><a href = "#">Redo</a></li>
@@ -40,7 +117,7 @@
                         <li><a href = "#">Select All</a></li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href = "#">View</a> <!--View Dropdown-->
+                <li class="dropdown"> <b>View</b> <!--View Dropdown-->
                     <ul class="dropdown-content"> 
                         <li><a href = "#">Zoom In</a></li>
                         <li><a href = "#">Zoom Out</a></li>
@@ -58,12 +135,12 @@
 
         <div class="info-box" id="box1"> <!--info boxes-->
             <h2>Instructions</h2>
-            <p>what the heck</p>
+            <p>Hi</p>
         </div>
 
         <div class="info-box" id="box2">
             <h2>Extra Credit</h2>
-            <p>are you doing here</p>
+            <p>What are you doing here</p>
         </div>
     </body>
 </html>
