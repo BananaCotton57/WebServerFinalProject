@@ -52,6 +52,10 @@
             list-style-type: none;
         }
 
+        #special:focus-within .dropdown-content{
+            display: block;
+        }
+
         .dropdown-content{
             display: none;
             list-style-type: none;
@@ -106,7 +110,7 @@
                         <li><a href = "#">Close</a></li>
                     </ul>
                 </li>
-                <li class="dropdown"> Edit <!--Edit Dropdown-->
+                <li class="dropdown" id="special"> Edit <!--Edit Dropdown-->
                     <ul class="dropdown-content">
                         <li><a href = "#">Undo</a></li>
                         <li><a href = "#">Redo</a></li>
