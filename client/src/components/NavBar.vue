@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import {ref} from 'vue'
+
+const isActive = ref(false)
 
 </script>
 
@@ -15,7 +18,8 @@
       
           </a>
       
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" 
+          :class="{ 'is-active': isActive }" @click="isActive = !isActive">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
