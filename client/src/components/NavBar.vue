@@ -27,7 +27,7 @@ const isActive = ref(false)
           </a>
         </div>
       
-        <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-menu" :class="{ 'is-active': isActive }">
           <div class="navbar-start">
 
             <RouterLink to="/" class="navbar-item"><i class="fas fa-home"></i>Home</RouterLink>
