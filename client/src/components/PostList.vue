@@ -9,7 +9,7 @@ const posts = ref([
     name: "John Smith", 
     username: "johnsmith", 
     time: getDate(), 
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas.",
+    content: "Running around Town!",
     exercise: "Running"
   },
   {

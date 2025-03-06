@@ -2,6 +2,7 @@
 import {ref} from 'vue'
 
 const isActive = ref(false)
+const isDropdownActive = ref(false);
 
 </script>
 
@@ -56,8 +57,8 @@ const isActive = ref(false)
                   <strong>Sign up</strong>
                 </a>
 
-              <div class="navbar-item has-dropdown is-hoverable"> <!-- is-hoverable -->
-                <a class="navbar-link">
+              <div class="navbar-item has-dropdown" :class="{ 'is-active': isDropdownActive }">
+                <a class="navbar-link" @click="isDropdownActive = !isDropdownActive">
                   Log in
                 </a>
 
