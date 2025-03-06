@@ -56,7 +56,7 @@ const isActive = ref(false)
                   <strong>Sign up</strong>
                 </a>
 
-              <div class="navbar-item has-dropdown is-hoverable">
+              <div class="navbar-item has-dropdown is-hoverable"> <!-- is-hoverable -->
                 <a class="navbar-link">
                   Log in
                 </a>

@@ -1,9 +1,15 @@
+<script setup lang="ts">
+import PostList from "@/components/PostList.vue";
+</script>
+
 <template>
-    <div class="friendsactivity">
-      <h1>This is a friends activity page</h1>
-      <p>Here you will find all of your friends activities and stuff</p>
-    </div>
-  </template>
-  
-  <style>
-  </style>
+  <div class="friends-activity">
+    <h1>This is the Friends Activity page</h1>
+    <p>Here you will find all of your friends' activities and stuff</p>
+    <PostList />
+  </div>
+</template>
+
+<style scoped>
+
+</style>
