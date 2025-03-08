@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed, defineProps } from 'vue';
 
 // Create the posts array as reactive data
+const props = defineProps({
+  posts: Array
+});
 
 const posts = ref([
   {
@@ -22,6 +25,8 @@ const posts = ref([
   }
 ]);
 
+const username = ref("johnsmith");
+
 function getDate() {
   const date = new Date();
   return date.toLocaleString();
@@ -31,6 +36,10 @@ function getDate() {
 function removePost(index: number) {
   posts.value.splice(index, 1);
 };
+
+const personalPosts = computed(() => {
+  return posts.value.filter(post => post.username === username.value);
+});
 </script>
 
 <template>

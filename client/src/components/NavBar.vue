@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import {ref} from 'vue'
+import UserList from './UserList.vue';
 
 const isActive = ref(false)
 const isDropdownActive = ref(false);
+const currentUser = ref(null);
 
 </script>
 
@@ -44,7 +46,7 @@ const isDropdownActive = ref(false);
       
               <div class="navbar-dropdown">
                 <a class="navbar-item">
-                  Users
+                  <RouterLink to="/admin" class="navbar-item">Admin</RouterLink>
                 </a>
               </div>
             </div>
@@ -64,15 +66,11 @@ const isDropdownActive = ref(false);
 
                 <div class="navbar-dropdown">
                   <a class="navbar-item">
-                    Germany
+                    John Smith
                   </a>
 
                   <a class="navbar-item">
-                    Person
-                  </a>
-
-                  <a class="navbar-item">
-                    Cow
+                    Jane Doe
                   </a>
                 </div>
 
