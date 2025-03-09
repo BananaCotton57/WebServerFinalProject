@@ -1,31 +1,34 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { createGlobalState } from '@vueuse/core';
 
-// Users array
-const users = ref([
-  { 
-    avatar: "https://bulma.io/assets/images/placeholders/128x128.png", 
-    name: "John Smith", 
-    username: "johnsmith",
-    isAdministrator: true
-  },
-  { 
-    avatar: "https://bulma.io/assets/images/placeholders/128x128.png",
-    name: "Jane Doe",
-    username: "janedoe",
-    isAdministrator: false
-  }
-]);
+// Create global state for users
+const useUsersState = createGlobalState(() => {
+  return ref([
+    { 
+      avatar: "https://bulma.io/assets/images/placeholders/128x128.png", 
+      name: "John Smith", 
+      username: "johnsmith",
+      isAdministrator: true
+    },
+    { 
+      avatar: "https://bulma.io/assets/images/placeholders/128x128.png",
+      name: "Jane Doe",
+      username: "janedoe",
+      isAdministrator: false
+    }
+  ]);
+});
 
-
+const users = useUsersState();  // Accessing the global state
 </script>
 
 <template>
   <div>
     <div class="buttons">
-    <button class="button is-primary">Add User</button>
-    <button class="button is-danger">Remove User</button>
-    <button class="button is-info">Edit User</button>
+      <button class="button is-primary">Add User</button>
+      <button class="button is-danger">Remove User</button>
+      <button class="button is-info">Edit User</button>
     </div>
     <h2>Users</h2>
     <!-- Wrap users in a UL for proper list structure -->
@@ -79,3 +82,4 @@ li:hover {
   margin-top: 5px;
 }
 </style>
+

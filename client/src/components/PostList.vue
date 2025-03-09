@@ -56,7 +56,8 @@ const personalPosts = computed(() => {
           <div class="content">
             <p>
               <strong>{{ post.name }}</strong> <small>@{{ post.username }}</small>
-              <small>{{ post.time }}</small>
+              <small> {{ post.time }}</small>
+              <small><strong> Exercise: {{ post.exercise }} </strong></small>
               <br />
               {{ post.content }}
             </p>
