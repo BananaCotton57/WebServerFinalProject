@@ -3,7 +3,11 @@ import {ref} from 'vue'
 
 const isActive = ref(false)
 const isDropdownActive = ref(false);
-const currentUser = ref(null);
+const currentUser = ref<string | null>(null);
+
+const logOut = () => {
+  currentUser.value = null // Clear user on logout
+}
 
 </script>
 
@@ -52,6 +56,13 @@ const currentUser = ref(null);
           </div>
       
           <div class="navbar-end">
+            <div v-if="currentUser" class="navbar-item">
+                <a class="button is-danger" @click="logOut">
+                  <strong>Log out</strong>
+                </a>
+                <h1>Logged in as: {{ currentUser }}</h1>
+              </div>
+
             <div class="navbar-item">
               <div class="buttons">
                 <a class="button is-primary">
@@ -64,11 +75,11 @@ const currentUser = ref(null);
                 </a>
 
                 <div class="navbar-dropdown">
-                  <a class="navbar-item">
+                  <a class="navbar-item" @click="currentUser = 'John Smith'">
                     John Smith
                   </a>
 
-                  <a class="navbar-item">
+                  <a class="navbar-item" @click="currentUser = 'Jane Doe'">
                     Jane Doe
                   </a>
                 </div>
