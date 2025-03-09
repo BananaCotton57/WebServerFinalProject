@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, defineProps } from 'vue';
-
-// Create the posts array as reactive data
-const props = defineProps({
-  posts: Array
-});
+import { ref, computed } from 'vue';
 
 const posts = ref([
   {
