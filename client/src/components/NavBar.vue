@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import {ref} from 'vue'
+import {ref} from 'vue';
 
 const isActive = ref(false)
 const isDropdownActive = ref(false);
-const currentUser = ref<string | null>(null);
+const currentUser = ref("");
 
 const logOut = () => {
-  currentUser.value = null // Clear user on logout
+  currentUser.value = "" // Clear user on logout
 }
 
 </script>
@@ -91,7 +91,5 @@ const logOut = () => {
         </div>
     </div>
   </nav>
-
 </template>
-
 <style scoped></style>

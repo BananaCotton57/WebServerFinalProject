@@ -1,26 +1,19 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { createGlobalState } from '@vueuse/core';
 
-// Create global state for users
-const useUsersState = createGlobalState(() => {
-  return ref([
-    { 
-      avatar: "https://bulma.io/assets/images/placeholders/128x128.png", 
-      name: "John Smith", 
-      username: "johnsmith",
-      isAdministrator: true
-    },
-    { 
-      avatar: "https://bulma.io/assets/images/placeholders/128x128.png",
-      name: "Jane Doe",
-      username: "janedoe",
-      isAdministrator: false
-    }
-  ]);
-});
+const users = ref([{
+  avatar: "https://bulma.io/assets/images/placeholders/128x128.png", 
+  name: "John Smith", 
+  username: "johnsmith",
+  isAdministrator: true
+},
+{ 
+  avatar: "https://bulma.io/assets/images/placeholders/128x128.png",
+  name: "Jane Doe",
+  username: "janedoe",
+  isAdministrator: false
+}]);
 
-const users = useUsersState();  // Accessing the global state
 </script>
 
 <template>
