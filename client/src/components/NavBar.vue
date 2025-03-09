@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {ref} from 'vue'
-import UserList from './UserList.vue';
 
 const isActive = ref(false)
 const isDropdownActive = ref(false);
