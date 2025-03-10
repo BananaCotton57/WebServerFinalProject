@@ -37,12 +37,12 @@ const logOut = () => {
           <div class="navbar-start">
 
             <RouterLink to="/" class="navbar-item"><i class="fas fa-home"></i>Home</RouterLink>
-            <RouterLink to="/about" class="navbar-item">About</RouterLink>
+            <RouterLink to="/about" class="navbar-item">About</RouterLink> 
             <RouterLink to="/activity" class="navbar-item">Activity</RouterLink>
             <RouterLink to="/friendsactivity" class="navbar-item"><i class="fas fa-passport"></i>Friends Activity</RouterLink>
             <RouterLink to="/statistics" class="navbar-item">Statistics</RouterLink>
 
-            <div class="navbar-item has-dropdown is-hoverable">
+            <div class="navbar-item has-dropdown is-hoverable" v-if="currentUser === 'John Smith'">
               <a class="navbar-link">
                 Admin
               </a>
