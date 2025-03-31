@@ -30,9 +30,9 @@ function getDate() {
 }
 
 // Function to remove a post from the array by index
-function removePost(index: number) {
-  posts.value.splice(index, 1);
-};
+//function removePost(index: number) {
+//  posts.value.splice(index, 1);
+//};
 
 const personalPosts = computed(() => {
   return posts.value.filter(post => post.username === username.value);
@@ -82,7 +82,7 @@ const personalPosts = computed(() => {
                 </span>
               </a>
               <!-- Button to remove the post -->
-              <a class="level-item" @click="removePost(index)">
+              <a class="level-item">
                 <span class="icon is-small">
                   <i class="fas fa-trash" aria-hidden="true"></i>
                 </span>
