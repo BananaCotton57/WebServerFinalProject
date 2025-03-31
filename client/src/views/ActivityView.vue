@@ -9,9 +9,10 @@ const { personalPosts } = usePostData();
 <template>
   <div>
     <h1>Activity Feed</h1>
-    <!-- Pass the filtered posts (personalPosts) to PostList -->
+    <!-- Directly pass the computed property (no .value needed in the template) -->
     <PostList :posts="personalPosts" /> 
   </div>
 </template>
+
 
 
