@@ -47,7 +47,7 @@ function removePost(index: number) {
   posts.value.splice(index, 1);
 }
 
-// Computed property to get posts of a specific user
+// Computed property to get posts of a personal user
 const personalPosts = computed(() => {
   return posts.value.filter((post) => post.username === username.value);
 });

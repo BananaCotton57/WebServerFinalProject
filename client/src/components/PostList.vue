@@ -1,45 +1,19 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { usePostData } from "@/models/postData"; 
 
-const posts = ref([
-  {
-    avatar: "https://bulma.io/assets/images/placeholders/128x128.png", 
-    name: "John Smith", 
-    username: "johnsmith", 
-    time: getDate(), 
-    content: "Running around Town!",
-    exercise: "Running"
+defineProps({
+  posts: {
+    type: Array,
+    required: true,
   },
-  {
-    avatar: "https://bulma.io/assets/images/placeholders/128x128.png", 
-    name: "Jane Doe", 
-    username: "janedoe", 
-    time: getDate(), 
-    content: "Nullam condimentum luctus turpis. Curabitur scelerisque libero ac sapien dignissim hendrerit.",
-    exercise: "Cycling"
-  }
-]);
-
-const username = ref("johnsmith");
-
-function getDate() {
-  const date = new Date();
-  return date.toLocaleString();
-}
-
-// Function to remove a post from the array by index
-function removePost(index: number) {
-  posts.value.splice(index, 1);
-};
-
-const personalPosts = computed(() => {
-  return posts.value.filter(post => post.username === username.value);
+  allowRemove: Boolean,  // Prop that determines if delete button appears
 });
+
+const { posts, removePost } = usePostData();
 </script>
 
 <template>
   <div>
-    <!-- Loop through posts and display each post -->
     <div v-for="(post, index) in posts" :key="index" class="box">
       <article class="media">
         <div class="media-left">
@@ -74,8 +48,8 @@ const personalPosts = computed(() => {
                   <i class="fas fa-heart" aria-hidden="true"></i>
                 </span>
               </a>
-              <!-- Button to remove the post -->
-              <a class="level-item" @click="removePost(index)">
+              <!-- Only show remove button if allowRemove is true -->
+              <a v-if="allowRemove" class="level-item" @click="removePost(index)">
                 <span class="icon is-small">
                   <i class="fas fa-trash" aria-hidden="true"></i>
                 </span>
@@ -88,6 +62,3 @@ const personalPosts = computed(() => {
   </div>
 </template>
 
-<style scoped>
-/* Add any custom styles if necessary */
-</style>
