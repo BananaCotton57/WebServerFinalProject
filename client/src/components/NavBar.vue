@@ -1,13 +1,11 @@
 <script setup lang="ts">
+import { refSession, isAdmin, login, logout } from '@/viewmodels/session';
 import {ref} from 'vue';
+
+const session = refSession();
 
 const isActive = ref(false)
 const isDropdownActive = ref(false);
-const currentUser = ref("");
-
-const logOut = () => {
-  currentUser.value = "" // Clear user on logout
-}
 
 </script>
 
@@ -42,7 +40,7 @@ const logOut = () => {
             <RouterLink to="/friendsactivity" class="navbar-item"><i class="fas fa-passport"></i>Friends Activity</RouterLink>
             <RouterLink to="/statistics" class="navbar-item">Statistics</RouterLink>
 
-            <div class="navbar-item has-dropdown is-hoverable" v-if="currentUser === 'John Smith'">
+            <div class="navbar-item has-dropdown is-hoverable" v-if="isAdmin">
               <a class="navbar-link">
                 Admin
               </a>
@@ -56,11 +54,11 @@ const logOut = () => {
           </div>
       
           <div class="navbar-end">
-            <div v-if="currentUser" class="navbar-item">
-                <a class="button is-danger" @click="logOut">
+            <div v-if="session.user" class="navbar-item">
+                <a class="button is-danger" @click="logout">
                   <strong>Log out</strong>
                 </a>
-                <h1>Logged in as: {{ currentUser }}</h1>
+                <h1>Logged in as: {{ session.user }}</h1>
               </div>
 
             <div class="navbar-item">
@@ -75,11 +73,11 @@ const logOut = () => {
                 </a>
 
                 <div class="navbar-dropdown">
-                  <a class="navbar-item" @click="currentUser = 'John Smith'">
+                  <a class="navbar-item" @click="login('John Smith')">
                     John Smith
                   </a>
 
-                  <a class="navbar-item" @click="currentUser = 'Jane Doe'">
+                  <a class="navbar-item" @click="login( 'Jane Doe')">
                     Jane Doe
                   </a>
                 </div>
