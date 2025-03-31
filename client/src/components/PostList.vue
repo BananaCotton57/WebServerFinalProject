@@ -1,15 +1,12 @@
 <script setup lang="ts">
-import { usePostData } from "@/models/postData"; 
+import { usePostData, type Post } from "@/models/postData";
+import { removePost } from "@/models/postData";
 
-defineProps({
-  posts: {
-    type: Array,
-    required: true,
-  },
-  allowRemove: Boolean,  // Prop that determines if delete button appears
-});
+defineProps<{
+  posts: Post[],
+  allowRemove: boolean,
+}>();
 
-const { posts, removePost } = usePostData();
 </script>
 
 <template>

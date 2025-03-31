@@ -1,4 +1,5 @@
 import { ref, computed } from "vue";
+import { refSession } from "@/viewmodels/session";
 
 export interface Post {
   avatar: string;
@@ -10,12 +11,12 @@ export interface Post {
 }
 
 // Function to get current date/time
-function getDate(): string {
+export function getDate(): string {
   return new Date().toLocaleString();
 }
 
 // The reactive array of posts
-const posts = ref<Post[]>([
+export const posts = ref<Post[]>([
   {
     avatar: "https://bulma.io/assets/images/placeholders/128x128.png",
     name: "John Smith",
@@ -38,17 +39,20 @@ const posts = ref<Post[]>([
 const username = ref("johnsmith");
 
 // Function to add a new post
-function addPost(newPost: Post) {
+export function addPost(newPost: Post) {
     posts.value.unshift(newPost);
 }
 
 // Function to remove a post
-function removePost(index: number) {
+export function removePost(index: number) {
   posts.value.splice(index, 1);
 }
 
 // Computed property to get posts of a personal user
-const filteredPosts = posts.value.filter(post => post.username === username.value);
+export const filteredPosts = computed(() => {
+    const session = refSession();
+    return posts.value.filter(post => post.name === session.value.user);
+  });
 
 // Export everything
 export function usePostData() {
