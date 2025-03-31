@@ -48,9 +48,7 @@ function removePost(index: number) {
 }
 
 // Computed property to get posts of a personal user
-const personalPosts = computed(() => {
-  return posts.value.filter((post) => post.username === username.value);
-});
+const filteredPosts = posts.value.filter(post => post.username === username.value);
 
 // Export everything
 export function usePostData() {
@@ -59,6 +57,5 @@ export function usePostData() {
     username,
     addPost,
     removePost,
-    personalPosts,
   };
 }
