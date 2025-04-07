@@ -35,8 +35,8 @@ export const posts = ref<Post[]>([
   }
 ]);
 
-// Reactive username
-const username = ref("johnsmith");
+// Reactive username (now unused)
+// const username = ref("johnsmith");
 
 // Function to add a new post
 export function addPost(newPost: Post) {
@@ -58,7 +58,6 @@ export const filteredPosts = computed(() => {
 export function usePostData() {
   return {
     posts,
-    username,
     addPost,
     removePost,
   };
