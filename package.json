@@ -1,0 +1,20 @@
+{
+  "name": "WebServerFinalProject",
+  "version": "1.0.0",
+  "description": "This is my final project for the Web Server course. It is a web server that serves a Vue.js application.",
+  "private": true,
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js -watch server",
+    "build:client": "npm run build --prefix client",
+    "build": "pnpm i --prefix client && npm run build --prefix client"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "dayjs": "^1.11.13",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
