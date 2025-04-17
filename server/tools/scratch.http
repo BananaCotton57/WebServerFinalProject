@@ -1,0 +1,103 @@
+
+
+
+###
+http://localhost:8000/api/v1/users
+
+###
+GET http://localhost:8000/api/v1/users/1
+
+###
+POST http://localhost:8000/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Sokka",
+  "username": "sokka",
+  "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
+  "isAdministrator": false
+}
+
+###
+PATCH http://localhost:8000/api/v1/users/1
+Content-Type: application/json
+
+{
+  "name": "Jason",
+  "username": "jason",
+  "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
+  "isAdministrator": false
+}
+###
+DELETE http://localhost:8000/api/v1/users/1
+Content-Type: application/json
+
+{
+  "name": "Sokka",
+  "username": "sokka",
+  "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
+  "isAdministrator": false
+}
+
+########--Activity Controller--########
+
+###
+http://localhost:8000/api/v1/activities
+
+###
+GET http://localhost:8000/api/v1/activities/2
+
+###
+POST http://localhost:8000/api/v1/activities
+Content-Type: application/json
+
+{
+    "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
+    "name": "Harold Smith",
+    "username": "hi",
+    "content": "Kaboom batlefield",
+    "exercise": "Running"
+}
+
+###
+PATCH http://localhost:8000/api/v1/activities/1
+Content-Type: application/json
+
+{
+    "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
+    "name": "Harold Parker",
+    "username": "hi",
+    "content": "Idolizer",
+    "exercise": "Running"
+}
+
+###
+DELETE http://localhost:8000/api/v1/activities/1
+
+
+####--ExerciseType Controller--####
+
+###
+http://localhost:8000/api/v1/exerciseTypes
+
+###
+GET http://localhost:8000/api/v1/exerciseTypes/1
+
+###
+POST http://localhost:8000/api/v1/exerciseTypes
+Content-Type: application/json
+
+{
+    "exercise": "ransom"
+}
+
+###
+PATCH http://localhost:8000/api/v1/exerciseTypes/1
+Content-Type: application/json
+
+{
+    "exercise": "orange"
+}
+
+###
+DELETE http://localhost:8000/api/v1/exerciseTypes/1

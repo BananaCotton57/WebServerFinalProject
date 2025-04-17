@@ -1,4 +1,4 @@
-const data = require('../data/users.json')
+const data = require('../data/activity.json')
 const { CustomError, statusCodes } = require('./errors')
 
 const isAdmin = true;
@@ -8,47 +8,44 @@ async function getAll() {
 }
 
 async function get(id){
-    const item = data.items.find((item) => item.id == id)
-    if (!item) {
-        throw new CustomError('Item not found', statusCodes.NOT_FOUND)
+    const activity = data.find((activity) => activity.id == id)
+    if (!activity) {
+        throw new CustomError('Could not find post', statusCodes.NOT_FOUND)
     }
-    return item
+    return activity
 }
 
-async function create(item){
-    if(!isAdmin){
-        throw CustomError("Sorry, you are not authorized to create a new item", statusCodes.UNAUTHORIZED)
+async function create(activity){
+    const newActivity = {
+        id: data.length + 1,
+        ...activity
     }
-    const newItem = {
-        id: data.items.length + 1,
-        ...item
-    }
-    data.items.push(newItem)
-    return newItem
+    data.push(newActivity)
+    return newActivity
 }
 
-async function update(id, item){
-    const index = data.items.findIndex((item) => item.id == id)
+async function update(id, activity){
+    const index = data.findIndex((activity) => activity.id == id)
     if (index === -1) {
         return null
     }
-    const updatedItem = {
-        ...data.items[index],
-        ...item
+    const updatedActivity = {
+        ...data[index],
+        ...activity
     }
-    data.items[index] = updatedItem
-    return updatedItem
+    data[index] = updatedActivity
+    return updatedActivity
 
 }
 
 async function remove(id){
-    const index = data.items.findIndex((item) => item.id == id)
+    const index = data.findIndex((activity) => activity.id == id)
     if (index === -1) {
         return null
     }
-    const deletedItem = data.items[index]
-    data.items.splice(index, 1)
-    return deletedItem
+    const deletedActivity = data[index]
+    data.splice(index, 1)
+    return deletedActivity
 }
 
 module.exports = {

@@ -17,7 +17,7 @@ app
     res.send('Hello New Paltz, NY!!!')
   })
   .use('/api/v1/users', usersController)
-  .use('/api/v1/activity', activityController)
+  .use('/api/v1/activities', activityController)
   .use('/api/v1/exerciseTypes', exerciseTypesController)
   
   .use('/', express.static('dist')) //vue client uses dist
