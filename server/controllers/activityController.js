@@ -43,5 +43,12 @@ router
             res.send(data)
         }).catch(next)
     })
+    .get('/user/:username', (req, res, next) => {
+        const { username } = req.params;
+    
+        model.filterByUsername(username)
+            .then(data => res.send(data))
+            .catch(next);
+    });    
 
 module.exports = router

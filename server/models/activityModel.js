@@ -48,10 +48,15 @@ async function remove(id){
     return deletedActivity
 }
 
+async function filterByUsername(username) {
+    return data.filter(activity => activity.username === username);
+}
+
 module.exports = {
     getAll,
     get,
     create,
     update,
-    remove
+    remove,
+    filterByUsername
 }
