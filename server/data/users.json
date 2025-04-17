@@ -1,27 +1,17 @@
-{
+[
+  {
     "id": 1,
-    "username": "johnDoe123",
-    "password": "hashedpassword123", 
-    "email": "john@example.com",
-    "avatar": "http://link-to-avatar.com/avatar.jpg", 
-    "name": "John Doe",
-    "age": 30,
-    "weight": 75, 
-    "height": 175,
-    "fitnessGoals": "lose weight",
-    "activityLog": [
-      {
-        "exercise": "Push-up",
-        "sets": 3,
-        "reps": 15,
-        "time": "2025-04-06T09:00:00Z"
-      },
-      {
-        "exercise": "Squats",
-        "sets": 3,
-        "reps": 20,
-        "time": "2025-04-06T10:00:00Z"
-      }
-    ]
+    "avatar": "https://bulma.io/assets/images/placeholders/128x128.png", 
+    "name": "John Smith", 
+    "username": "johnsmith",
+    "isAdministrator": true
+  },
+  { 
+    "id": 2,
+    "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
+    "name": "Jane Doe",
+    "username": "janedoe",
+    "isAdministrator": false
   }
+]
   
