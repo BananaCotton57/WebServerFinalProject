@@ -20,6 +20,10 @@ export function login(user: User) {
     session.value.user = user;
 }
 
+export function isLoggedIn() {
+    return session.value.user !== null;
+}
+
 export function logout() {
     session.value.user = null;
 }

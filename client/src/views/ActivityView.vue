@@ -2,9 +2,9 @@
 import { ref } from "vue";
 import PostList from "@/components/PostList.vue";
 import { usePostData, filteredPosts } from "@/models/postData";
-import { refSession } from "@/viewmodels/session";
-
+import { refSession, isLoggedIn } from "@/viewmodels/session";
 const { addPost } = usePostData();
+
 const isModalActive = ref(false);
 const newPostContent = ref('');
 const selectedExercise = ref('Running');
@@ -16,6 +16,10 @@ const toggleModal = () => {
 };
 
 const addNewPost = () => {
+  if (!isLoggedIn()) {
+    alert("You must be logged in to add a post.");
+    return;
+  }
   if (!newPostContent.value) return;
 
   addPost({
@@ -39,7 +43,7 @@ const addNewPost = () => {
 
 <template>
   <div>
-    <button class="button is-primary" @click="toggleModal">Add Post</button>
+    <button class="button is-primary" v-if="isLoggedIn()" @click="toggleModal">Add Post</button>
     <h1>Activity Feed</h1>
     <!-- Directly pass the computed property (no .value needed in the template) -->
     <PostList :posts="filteredPosts" :allow-remove="true" />
