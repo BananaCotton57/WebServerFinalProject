@@ -23,4 +23,13 @@
       "content": "Crystallize.",
       "exercise": "Swimming"
     }
+    ,
+    {
+      "id": 4,
+      "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
+      "name": "Arnold Schwarzenegger",
+      "username": "arnoldschwarzenegger",
+      "content": "Walking around Town!",
+      "exercise": "Walking"
+    }
   ]

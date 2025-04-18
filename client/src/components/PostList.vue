@@ -11,7 +11,7 @@ defineProps<{
 
 <template>
   <div>
-    <div v-for="(post, index) in posts" :key="index" class="box">
+    <div v-for="(post, index) in [...posts].reverse()" :key="index" class="box">
       <article class="media">
         <div class="media-left">
           <figure class="image is-64x64">
@@ -22,7 +22,6 @@ defineProps<{
           <div class="content">
             <p>
               <strong>{{ post.name }}</strong> <small>@{{ post.username }}</small>
-              <small> {{ post.time }}</small>
               <small><strong> Exercise: {{ post.exercise }} </strong></small>
               <br />
               {{ post.content }}
@@ -46,7 +45,7 @@ defineProps<{
                 </span>
               </a>
               <!-- Only show remove button if allowRemove is true -->
-              <a v-if="allowRemove" class="level-item" @click="removePost(index)">
+              <a v-if="allowRemove" class="level-item" @click="removePost(posts.length - 1 - index)">
                 <span class="icon is-small">
                   <i class="fas fa-trash" aria-hidden="true"></i>
                 </span>
