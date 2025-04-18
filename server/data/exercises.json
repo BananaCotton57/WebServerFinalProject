@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "exercise": "Running"
+    },
+    {
+        "id": 2,
+        "exercise": "Cycling"
+    },
+    {
+        "id": 3,
+        "exercise": "Swimming"
+    },
+    {
+        "id": 4,
+        "exercise": "Walking"
+    },
+    {
+        "id": 5,
+        "exercise": "Yoga"
+    },
+    {
+        "id": 6,
+        "exercise": "Weightlifting"
+    },
+    {
+        "id": 7,
+        "exercise": "Pilates"
+    },
+    {
+        "id": 8,
+        "exercise": "Dancing"
+    },
+    {
+        "id": 9,
+        "exercise": "Hiking"
+    }
+]

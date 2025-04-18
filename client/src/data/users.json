@@ -1,0 +1,24 @@
+[
+    {
+      "id": 1,
+      "avatar": "https://bulma.io/assets/images/placeholders/128x128.png", 
+      "name": "John Smith", 
+      "username": "johnsmith",
+      "isAdministrator": true
+    },
+    { 
+      "id": 2,
+      "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
+      "name": "Jane Doe",
+      "username": "janedoe",
+      "isAdministrator": false
+    }
+    ,
+    {
+      "id": 3,
+      "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
+      "name": "Arnold Schwarzenegger",
+      "username": "arnoldschwarzenegger",
+      "isAdministrator": false
+    }
+  ]

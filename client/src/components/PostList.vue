@@ -1,46 +1,17 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { usePostData, type Post } from "@/models/postData";
+import { removePost } from "@/models/postData";
 
-const posts = ref([
-  {
-    avatar: "https://bulma.io/assets/images/placeholders/128x128.png", 
-    name: "John Smith", 
-    username: "johnsmith", 
-    time: getDate(), 
-    content: "Running around Town!",
-    exercise: "Running"
-  },
-  {
-    avatar: "https://bulma.io/assets/images/placeholders/128x128.png", 
-    name: "Jane Doe", 
-    username: "janedoe", 
-    time: getDate(), 
-    content: "Nullam condimentum luctus turpis. Curabitur scelerisque libero ac sapien dignissim hendrerit.",
-    exercise: "Cycling"
-  }
-]);
+defineProps<{
+  posts: Post[],
+  allowRemove: boolean,
+}>();
 
-const username = ref("johnsmith");
-
-function getDate() {
-  const date = new Date();
-  return date.toLocaleString();
-}
-
-// Function to remove a post from the array by index
-function removePost(index: number) {
-  posts.value.splice(index, 1);
-};
-
-const personalPosts = computed(() => {
-  return posts.value.filter(post => post.username === username.value);
-});
 </script>
 
 <template>
   <div>
-    <!-- Loop through posts and display each post -->
-    <div v-for="(post, index) in posts" :key="index" class="box">
+    <div v-for="(post, index) in [...posts].reverse()" :key="index" class="box">
       <article class="media">
         <div class="media-left">
           <figure class="image is-64x64">
@@ -51,7 +22,6 @@ const personalPosts = computed(() => {
           <div class="content">
             <p>
               <strong>{{ post.name }}</strong> <small>@{{ post.username }}</small>
-              <small> {{ post.time }}</small>
               <small><strong> Exercise: {{ post.exercise }} </strong></small>
               <br />
               {{ post.content }}
@@ -74,8 +44,8 @@ const personalPosts = computed(() => {
                   <i class="fas fa-heart" aria-hidden="true"></i>
                 </span>
               </a>
-              <!-- Button to remove the post -->
-              <a class="level-item" @click="removePost(index)">
+              <!-- Only show remove button if allowRemove is true -->
+              <a v-if="allowRemove" class="level-item" @click="removePost(posts.length - 1 - index)">
                 <span class="icon is-small">
                   <i class="fas fa-trash" aria-hidden="true"></i>
                 </span>
@@ -88,6 +58,3 @@ const personalPosts = computed(() => {
   </div>
 </template>
 
-<style scoped>
-/* Add any custom styles if necessary */
-</style>

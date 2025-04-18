@@ -1,101 +1,86 @@
 <script setup lang="ts">
-import PostList from '@/components/PostList.vue';
+import { ref } from "vue";
+import PostList from "@/components/PostList.vue";
+import { usePostData, filteredPosts } from "@/models/postData";
+import { refSession, isLoggedIn } from "@/viewmodels/session";
+const { addPost } = usePostData();
 
-import { ref, computed } from 'vue';
+const isModalActive = ref(false);
+const newPostContent = ref('');
+const selectedExercise = ref('Running');
 
-const posts = ref([
-  {
-    avatar: "https://bulma.io/assets/images/placeholders/128x128.png", 
-    name: "John Smith", 
-    username: "johnsmith", 
-    time: getDate(), 
-    content: "Running around Town!",
-    exercise: "Running"
-  },
-  {
-    avatar: "https://bulma.io/assets/images/placeholders/128x128.png", 
-    name: "Jane Doe", 
-    username: "janedoe", 
-    time: getDate(), 
-    content: "Nullam condimentum luctus turpis. Curabitur scelerisque libero ac sapien dignissim hendrerit.",
-    exercise: "Cycling"
+const session = refSession();
+
+const toggleModal = () => {
+  isModalActive.value = !isModalActive.value;
+};
+
+const addNewPost = () => {
+  if (!isLoggedIn()) {
+    alert("You must be logged in to add a post.");
+    return;
   }
-]);
+  if (!newPostContent.value) return;
 
-const username = ref("johnsmith");
+  addPost({
+    avatar: session.value.user?.avatar || "https://bulma.io/assets/images/placeholders/128x128.png",
+    name: session.value.user?.name || "Anonymous",
+    username: session.value.user?.username || "anonymous",
+    //time: new Date().toLocaleString(),
+    content: newPostContent.value,
+    exercise: selectedExercise.value,
+  });
 
-function getDate() {
-  const date = new Date();
-  return date.toLocaleString();
-}
+  newPostContent.value = '';
+  selectedExercise.value = 'Running';
+  toggleModal();
+};
 
-// Function to remove a post from the array by index
-//function removePost(index: number) {
-//  posts.value.splice(index, 1);
-//};
 
-const personalPosts = computed(() => {
-  return posts.value.filter(post => post.username === username.value);
-});
 
+// Removed conflicting local ref function declaration
 </script>
 
 <template>
-  <div class="activity">
-    <h1>This is an activity page</h1>
-    <p>Here you will find all of your activities and stuff</p>
-    <!---<PostList />-->
-    <div>
-    <!-- Loop through posts and display each post -->
-    <div v-for="(post, index) in personalPosts" :key="index" class="box">
-      <article class="media">
-        <div class="media-left">
-          <figure class="image is-64x64">
-            <img :src="post.avatar" alt="Avatar" />
-          </figure>
-        </div>
-        <div class="media-content">
-          <div class="content">
-            <p>
-              <strong>{{ post.name }}</strong> <small>@{{ post.username }}</small>
-              <small> {{ post.time }}</small>
-              <small><strong> Exercise: {{ post.exercise }} </strong></small>
-              <br />
-              {{ post.content }}
-            </p>
-          </div>
-          <nav class="level is-mobile">
-            <div class="level-left">
-              <a class="level-item" aria-label="reply">
-                <span class="icon is-small">
-                  <i class="fas fa-reply" aria-hidden="true"></i>
-                </span>
-              </a>
-              <a class="level-item" aria-label="retweet">
-                <span class="icon is-small">
-                  <i class="fas fa-retweet" aria-hidden="true"></i>
-                </span>
-              </a>
-              <a class="level-item" aria-label="like">
-                <span class="icon is-small">
-                  <i class="fas fa-heart" aria-hidden="true"></i>
-                </span>
-              </a>
-              <!-- Button to remove the post -->
-              <a class="level-item">
-                <span class="icon is-small">
-                  <i class="fas fa-trash" aria-hidden="true"></i>
-                </span>
-              </a>
+  <div>
+    <button class="button is-primary" v-if="isLoggedIn()" @click="toggleModal">Add Post</button>
+    <h1>Activity Feed</h1>
+    <!-- Directly pass the computed property (no .value needed in the template) -->
+    <PostList :posts="filteredPosts" :allow-remove="true" />
+
+    <div class="modal" :class="{'is-active': isModalActive}">
+      <div class="modal-background" @click="toggleModal"></div>
+      <div class="modal-content">
+        <div class="box">
+          <h2 class="title">Add a New Post</h2>
+          <form @submit.prevent="addNewPost">
+            <div class="field">
+              <label class="label">Post Content</label>
+              <div class="control">
+                <textarea class="textarea" v-model="newPostContent" placeholder="What's on your mind?"></textarea>
+              </div>
             </div>
-          </nav>
+            <div class="field">
+              <label class="label">Exercise Type</label>
+              <div class="control">
+                <select v-model="selectedExercise">
+                  <option>Running</option>
+                  <option>Cycling</option>
+                  <option>Swimming</option>
+                  <option>Walking</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <button type="submit" class="button is-primary">Submit Post</button>
+            </div>
+          </form>
         </div>
-      </article>
+      </div>
+      <button class="modal-close is-large" aria-label="close" @click="toggleModal"></button>
     </div>
-  </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
 
-</style>
+

@@ -1,0 +1,35 @@
+[
+    {
+      "id": 1,
+      "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
+      "name": "John Smith",
+      "username": "johnsmith",
+      "content": "Running around Town!",
+      "exercise": "Running"
+    },
+    {
+      "id": 2,
+      "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
+      "name": "Jane Doe",
+      "username": "janedoe",
+      "content": "Nullam condimentum luctus turpis. Curabitur scelerisque libero ac sapien dignissim hendrerit.",
+      "exercise": "Cycling"
+    },
+    {
+      "id": 3,
+      "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
+      "name": "Jane Doe",
+      "username": "janedoe",
+      "content": "Crystallize.",
+      "exercise": "Swimming"
+    }
+    ,
+    {
+      "id": 4,
+      "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
+      "name": "Arnold Schwarzenegger",
+      "username": "arnoldschwarzenegger",
+      "content": "Walking around Town!",
+      "exercise": "Walking"
+    }
+  ]
