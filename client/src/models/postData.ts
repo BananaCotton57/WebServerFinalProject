@@ -50,9 +50,9 @@ export function removePost(index: number) {
 
 // Computed property to get posts of a personal user
 export const filteredPosts = computed(() => {
-    const session = refSession();
-    return posts.value.filter(post => post.name === session.value.user);
-  });
+  const session = refSession();
+  return posts.value.filter(post => post.name === session.value.user?.name);
+});
 
 // Export everything
 export function usePostData() {

@@ -1,16 +1,22 @@
 import { ref, computed } from "vue";
 
-const session = ref<{
-    user: string | null
-}>({
+type User = {
+    id: number,
+    avatar: string,
+    name: string,
+    username: string,
+    isAdministrator: boolean
+  };
+  
+  const session = ref<{ user: User | null }>({
     user: null,
-})
+  });
 
 export const refSession = ()=> session;
 
-export const isAdmin = computed( () => session.value.user == "John Smith" )
+export const isAdmin = computed(() => session.value.user?.isAdministrator === true);
 
-export function login(user: string) {
+export function login(user: User) {
     session.value.user = user;
 }
 

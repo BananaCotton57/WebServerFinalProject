@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { refSession, isAdmin, login, logout } from '@/viewmodels/session';
 import {ref} from 'vue';
+import users from '@/data/users.json';
 
 const session = refSession();
 
@@ -58,7 +59,7 @@ const isDropdownActive = ref(false);
                 <a class="button is-danger" @click="logout">
                   <strong>Log out</strong>
                 </a>
-                <h1>Logged in as: {{ session.user }}</h1>
+                <h1>Logged in as: {{ session.user.name }}</h1>
               </div>
 
             <div class="navbar-item">
@@ -73,13 +74,9 @@ const isDropdownActive = ref(false);
                 </a>
 
                 <div class="navbar-dropdown">
-                  <a class="navbar-item" @click="login('John Smith')">
-                    John Smith
-                  </a>
-
-                  <a class="navbar-item" @click="login( 'Jane Doe')">
-                    Jane Doe
-                  </a>
+                <a v-for="user in users" :key="user.id" class="navbar-item" @click="login(user)">
+                {{ user.name }}
+                </a>
                 </div>
 
               </div>
