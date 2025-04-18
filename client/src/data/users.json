@@ -13,4 +13,12 @@
       "username": "janedoe",
       "isAdministrator": false
     }
+    ,
+    {
+      "id": 3,
+      "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
+      "name": "Arnold Schwarzenegger",
+      "username": "arnoldschwarzenegger",
+      "isAdministrator": false
+    }
   ]

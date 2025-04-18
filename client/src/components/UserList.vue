@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import users from '@/data/users.json';
 
+/*
 const users = ref([{
   avatar: "https://bulma.io/assets/images/placeholders/128x128.png", 
   name: "John Smith", 
@@ -13,6 +15,8 @@ const users = ref([{
   username: "janedoe",
   isAdministrator: false
 }]);
+*/
+//will be replaced with a fetch call to the json file (temporary database)
 
 </script>
 
