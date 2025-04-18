@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import PostList from "@/components/PostList.vue";
 import { usePostData, filteredPosts } from "@/models/postData";
 import { refSession } from "@/viewmodels/session";
 
-const { posts, addPost } = usePostData();
+const { addPost } = usePostData();
 const isModalActive = ref(false);
 const newPostContent = ref('');
 const selectedExercise = ref('Running');
 
+const session = refSession();
 
 const toggleModal = () => {
   isModalActive.value = !isModalActive.value;
@@ -18,9 +19,9 @@ const addNewPost = () => {
   if (!newPostContent.value) return;
 
   addPost({
-    avatar: "https://bulma.io/assets/images/placeholders/128x128.png",
-    name: "John Smith",
-    username: "johnsmith",
+    avatar: session.value.user?.avatar || "https://bulma.io/assets/images/placeholders/128x128.png",
+    name: session.value.user?.name || "Anonymous",
+    username: session.value.user?.username || "anonymous",
     //time: new Date().toLocaleString(),
     content: newPostContent.value,
     exercise: selectedExercise.value,
