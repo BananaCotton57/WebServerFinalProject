@@ -4,6 +4,8 @@ const usersController = require('./controllers/usersController')
 const activityController = require('./controllers/activityController')
 const exerciseTypesController = require('./controllers/exerciseTypesController')
 
+require('dotenv').config() // Load environment variables from .env file
+
 const PORT = 8000
 
 const app = express();
