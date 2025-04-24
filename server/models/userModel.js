@@ -1,5 +1,8 @@
 const data = require('../data/users.json');
 const { CustomError, statusCodes } = require('./errors');
+const { connect } = require("./supabase")
+
+connect()
 
 async function getAll() {
     return data;
