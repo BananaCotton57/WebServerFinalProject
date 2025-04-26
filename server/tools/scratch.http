@@ -12,10 +12,10 @@ POST http://localhost:8000/api/v1/users
 Content-Type: application/json
 
 {
-  "name": "Sokka",
   "username": "sokka",
+  "name": "Sokka",
   "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
-  "isAdministrator": false
+  "is_administrator": false
 }
 
 ###
@@ -26,7 +26,7 @@ Content-Type: application/json
   "name": "Jason",
   "username": "jason",
   "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
-  "isAdministrator": false
+  "is_administrator": false
 }
 ###
 DELETE http://localhost:8000/api/v1/users/1
@@ -36,7 +36,7 @@ Content-Type: application/json
   "name": "Sokka",
   "username": "sokka",
   "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
-  "isAdministrator": false
+  "is_administrator": false
 }
 
 ########--Activity Controller--########
