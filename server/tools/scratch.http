@@ -12,8 +12,8 @@ POST http://localhost:8000/api/v1/users
 Content-Type: application/json
 
 {
-  "username": "sokka",
-  "name": "Sokka",
+  "username": "moo",
+  "name": "Cow",
   "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
   "is_administrator": false
 }
@@ -23,13 +23,13 @@ PATCH http://localhost:8000/api/v1/users/1
 Content-Type: application/json
 
 {
-  "name": "Jason",
+  "name": "Orange",
   "username": "jason",
   "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
   "is_administrator": false
 }
 ###
-DELETE http://localhost:8000/api/v1/users/1
+DELETE http://localhost:8000/api/v1/users/5
 Content-Type: application/json
 
 {
@@ -85,14 +85,14 @@ GET http://localhost:8000/api/v1/activities/user/janedoe
 http://localhost:8000/api/v1/exerciseTypes
 
 ###
-GET http://localhost:8000/api/v1/exerciseTypes/1
+GET http://localhost:8000/api/v1/exerciseTypes/10
 
 ###
 POST http://localhost:8000/api/v1/exerciseTypes
 Content-Type: application/json
 
 {
-    "exercise": "ransom"
+    "exercise": "jumping jacks"
 }
 
 ###
@@ -100,8 +100,8 @@ PATCH http://localhost:8000/api/v1/exerciseTypes/1
 Content-Type: application/json
 
 {
-    "exercise": "orange"
+    "exercise": "Running"
 }
 
 ###
-DELETE http://localhost:8000/api/v1/exerciseTypes/1
+DELETE http://localhost:8000/api/v1/exerciseTypes/10

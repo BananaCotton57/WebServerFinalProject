@@ -15,7 +15,7 @@ async function getAll() {
         throw error;
     }
     
-    return data;
+    return data.sort((a, b) => a.id - b.id);
 }
 
 async function get(id) {

@@ -1,55 +1,85 @@
 const data = require('../data/activity.json')
 const { CustomError, statusCodes } = require('./errors')
+const { connect } = require('./supabase');
+
+const TABLE_NAME = 'activities';
+
+// Helper function to get the base query
+const BaseQuery = () => connect()
+.from(TABLE_NAME)
+.select('*');
 
 const isAdmin = true;
 
 async function getAll() {
-    return data
+    const { data, error } = await BaseQuery().select('*');
+    
+    if (error) {
+        throw error;
+    }
+    
+    return data;
 }
 
-async function get(id){
-    const activity = data.find((activity) => activity.id == id)
-    if (!activity) {
-        throw new CustomError('Could not find post', statusCodes.NOT_FOUND)
+async function get(id) {
+    const { data, error } = await BaseQuery().select('*').eq('id', id);
+    
+    if (error) {
+        throw error;
     }
-    return activity
+    
+    if (!data.length) {
+        throw new CustomError('Could not find post', statusCodes.NOT_FOUND);
+    }
+    
+    return data[0];
 }
 
-async function create(activity){
-    const newActivity = {
-        id: data.length + 1,
-        ...activity
+async function create(activity) {
+    // Remove the id to let Supabase handle ID generation
+    const { id, ...activityWithoutId } = activity;
+    
+    const { data, error } = await BaseQuery().insert(activityWithoutId).select('*');
+    
+    if (error) {
+        throw error;
     }
-    data.push(newActivity)
-    return newActivity
+    
+    return data[0];
 }
 
-async function update(id, activity){
-    const index = data.findIndex((activity) => activity.id == id)
-    if (index === -1) {
-        return null
+async function update(id, activity) {
+    const { data, error } = await BaseQuery().update(activity).eq('id', id).select('*');
+    
+    if (error) {
+        throw error;
     }
-    const updatedActivity = {
-        ...data[index],
-        ...activity
+    
+    if (!data.length) {
+        return null;
     }
-    data[index] = updatedActivity
-    return updatedActivity
-
+    
+    return data[0];
 }
 
-async function remove(id){
-    const index = data.findIndex((activity) => activity.id == id)
-    if (index === -1) {
-        return null
+async function remove(id) {
+    const { data, error } = await BaseQuery().delete().eq('id', id).select('*');
+    
+    if (error) {
+        throw error;
     }
-    const deletedActivity = data[index]
-    data.splice(index, 1)
-    return deletedActivity
+    
+    return data[0];
 }
 
 async function filterByUsername(username) {
-    return data.filter(activity => activity.username === username);
+    const { data, error } = await BaseQuery().select('*').eq('username', username);
+    
+    if (error) {
+        throw error;
+    }
+    
+    return data;
 }
 
 module.exports = {
@@ -59,4 +89,4 @@ module.exports = {
     update,
     remove,
     filterByUsername
-}
+};
