@@ -70,11 +70,10 @@ async function remove(id) {
 
 async function filterByUsername(username) {
     const { data, error } = await BaseQuery()
-        .from('activities')
-        .select('activities.*, users.username')
+        .select('*, users(username)')
         .eq('users.username', username)
-        .join('users', 'activities.user_id', 'users.id'); // Joins the activities and users table
-    
+        .not('users', 'is', null); // Exclude rows where the users relationship is null
+
     if (error) {
         throw error;
     }

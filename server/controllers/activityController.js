@@ -11,6 +11,13 @@ router
         }).catch(next)
 
     })
+    .get('/user/:username', (req, res, next) => {
+        const { username } = req.params;
+    
+        model.filterByUsername(username)
+            .then(data => res.send(data))
+            .catch(next);
+    })
     .get('/:id', (req, res, next) => {
         const { id } = req.params
 
@@ -42,13 +49,6 @@ router
         model.remove(id).then((data) => {
             res.send(data)
         }).catch(next)
-    })
-    .get('/user/:username', (req, res, next) => {
-        const { username } = req.params;
-    
-        model.filterByUsername(username)
-            .then(data => res.send(data))
-            .catch(next);
-    });    
+    })  
 
 module.exports = router
