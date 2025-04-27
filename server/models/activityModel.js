@@ -5,11 +5,7 @@ const { connect } = require('./supabase');
 const TABLE_NAME = 'activities';
 
 // Helper function to get the base query
-const BaseQuery = () => connect()
-.from(TABLE_NAME)
-.select('*');
-
-const isAdmin = true;
+const BaseQuery = () => connect().from(TABLE_NAME);
 
 async function getAll() {
     const { data, error } = await BaseQuery().select('*');
@@ -73,12 +69,16 @@ async function remove(id) {
 }
 
 async function filterByUsername(username) {
-    const { data, error } = await BaseQuery().select('*').eq('username', username);
+    const { data, error } = await BaseQuery()
+        .from('activities')
+        .select('activities.*, users.username')
+        .eq('users.username', username)
+        .join('users', 'activities.user_id', 'users.id'); // Joins the activities and users table
     
     if (error) {
         throw error;
     }
-    
+
     return data;
 }
 
