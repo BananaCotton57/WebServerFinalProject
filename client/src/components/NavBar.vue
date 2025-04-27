@@ -48,7 +48,10 @@ const isDropdownActive = ref(false);
       
               <div class="navbar-dropdown">
                 <a class="navbar-item">
-                  <RouterLink to="/admin" class="navbar-item">Admin</RouterLink>
+                  <RouterLink to="/users" class="navbar-item">Users</RouterLink>
+                </a>
+                <a class="navbar-item">
+                  <RouterLink to="/exercises" class="navbar-item">Exercises</RouterLink>
                 </a>
               </div>
             </div>
