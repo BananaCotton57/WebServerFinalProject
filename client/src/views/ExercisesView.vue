@@ -4,6 +4,11 @@ import ExerciseList from '@/components/ExerciseList.vue';
 
 <template>
     <div>
+        <div class="buttons">
+            <button class="button is-primary">Add Exercise</button>
+            <button class="button is-danger">Remove Exercise</button>
+            <button class="button is-info">Edit Exercise</button>
+        </div>
         <ExerciseList />
     </div>
 </template>

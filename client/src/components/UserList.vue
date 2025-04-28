@@ -22,11 +22,6 @@ const users = ref([{
 
 <template>
   <div>
-    <div class="buttons">
-      <button class="button is-primary">Add User</button>
-      <button class="button is-danger">Remove User</button>
-      <button class="button is-info">Edit User</button>
-    </div>
     <h2>Users</h2>
     <!-- Wrap users in a UL for proper list structure -->
     <ul>
