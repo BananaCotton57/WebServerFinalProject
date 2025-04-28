@@ -9,7 +9,6 @@ export interface Post {
   username: string | null;
   content: string;
   exercise: string | number; // Adjust based on whether exercise is a name or ID
-  created_at: string;
 }
 
 // Convert the raw JSON data into a reactive ref
