@@ -4,11 +4,11 @@ import rawPosts from "@/data/activity.json";
 
 export interface Post {
   id: number;
-  avatar: string | null;
-  name: string | null;
-  username: string | null;
+  avatar: string;
+  name: string;
+  username: string;
   content: string;
-  exercise: string | number; // Adjust based on whether exercise is a name or ID
+  exercise: string; // Adjust based on whether exercise is a name or ID
 }
 
 // Convert the raw JSON data into a reactive ref
