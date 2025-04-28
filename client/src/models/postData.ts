@@ -3,11 +3,13 @@ import { refSession } from "@/viewmodels/session";
 import rawPosts from "@/data/activity.json";
 
 export interface Post {
-  avatar: string;
-  name: string;
-  username: string;
+  id: number;
+  avatar: string | null;
+  name: string | null;
+  username: string | null;
   content: string;
-  exercise: string;
+  exercise: string | number; // Adjust based on whether exercise is a name or ID
+  created_at: string;
 }
 
 // Convert the raw JSON data into a reactive ref
@@ -25,7 +27,7 @@ export function removePost(index: number) {
 // Filter based on current session user
 export const filteredPosts = computed(() => {
   const session = refSession();
-  return posts.value.filter(post => post.name === session.value.user?.name);
+  return posts.value.filter(post => post.username === session.value.user?.username);
 });
 
 export function usePostData() {
