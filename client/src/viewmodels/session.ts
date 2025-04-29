@@ -12,6 +12,10 @@ type User = {
   };
   */
   
+  export function api<T>(action: string): Promise<T> {
+    return myFetch.api<T>(action)
+  }
+
   const session = ref<{ user: User | null }>({
     user: null,
   });
