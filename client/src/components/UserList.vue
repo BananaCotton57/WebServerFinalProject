@@ -29,7 +29,7 @@ onMounted(async () => {
         <img :src="user.avatar" alt="Avatar" class="avatar" />
         <div class="user-info">
           <span><strong>{{ user.name }}</strong></span>
-          <span>{{ user.username }}</span>
+          <span>Username: {{ user.username }}</span>
           <span v-if="user.is_administrator" class="admin-tag">Administrator</span>
         </div>
       </li>
