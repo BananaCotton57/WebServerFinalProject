@@ -1,4 +1,5 @@
 import { ref } from "vue";
+import {api} from "@/viewmodels/session"; // Ensure this file exists and contains the required data
 import rawUsers from "@/data/users.json"; // Ensure this file exists and contains the required data
 
 export interface User {

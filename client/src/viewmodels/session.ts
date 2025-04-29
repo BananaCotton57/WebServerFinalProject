@@ -11,6 +11,10 @@ type User = {
     isAdministrator: boolean
   };
   */
+
+  export function getAll(): Promise<User> {
+    return api('users')
+  }
   
   export function api<T>(action: string): Promise<T> {
     return myFetch.api<T>(action)
