@@ -33,6 +33,7 @@ export function loadUsers() {
   });
 }
 
+/*
 export function addUser(newUser: User) {
   jsonUsers.value.unshift(newUser);
 }
@@ -40,3 +41,4 @@ export function addUser(newUser: User) {
 export function removeUser(index: number) {
   jsonUsers.value.splice(index, 1);
 }
+*/

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { refSession, isAdmin, login, logout } from '@/viewmodels/session';
-import {ref} from 'vue';
+import {ref, onMounted} from 'vue';
 import { loadUsers, usersRef, type User } from '@/models/users';
 import users from '@/data/users.json';
 
@@ -8,6 +8,21 @@ const session = refSession();
 
 const isActive = ref(false)
 const isDropdownActive = ref(false);
+
+const isLoading = ref(true);
+const error = ref<string | null>(null);
+
+onMounted(async () => { //im copying all of the isLoading and error a lot. I should probably make a function for this
+  try {
+    isLoading.value = true;
+    await loadUsers();
+    isLoading.value = false;
+  } catch (err) {
+    isLoading.value = false;
+    error.value = "Failed to load users";
+    console.error("Error loading users:", err);
+  }
+});
 
 </script>
 
@@ -78,7 +93,7 @@ const isDropdownActive = ref(false);
                 </a>
 
                 <div class="navbar-dropdown">
-                <a v-for="user in users" :key="user.id" class="navbar-item" @click="login(user)">
+                <a v-for="user in usersRef" :key="user.id" class="navbar-item" @click="login(user)">
                 {{ user.name }}
                 </a>
                 </div>
