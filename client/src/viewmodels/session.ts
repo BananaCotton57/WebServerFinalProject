@@ -1,42 +1,28 @@
 import { ref, computed } from "vue";
-import * as myFetch from '@/models/myFetch'
-import {type User} from "@/models/users"; // Ensure this file exists and contains the required data
+import * as myFetch from '@/models/myFetch';
+import { type User } from "@/models/users";
 
-/*
-type User = {
-    id: number,
-    avatar: string,
-    name: string,
-    username: string,
-    isAdministrator: boolean
-  };
-  */
+// This should match the function in myFetch.ts
+export function api<T>(action: string): Promise<T> {
+  return myFetch.api<T>(action);
+}
 
-  export function getAll(): Promise<User> {
-    return api('users')
-  }
-  
-  export function api<T>(action: string): Promise<T> {
-    return myFetch.api<T>(action)
-  }
+const session = ref<{ user: User | null }>({
+  user: null,
+});
 
-  const session = ref<{ user: User | null }>({
-    user: null,
-  });
-
-export const refSession = ()=> session;
+export const refSession = () => session;
 
 export const isAdmin = computed(() => session.value.user?.isAdministrator === true);
 
 export function login(user: User) {
-    session.value.user = user;
+  session.value.user = user;
 }
 
 export function isLoggedIn() {
-    return session.value.user !== null;
+  return session.value.user !== null;
 }
 
 export function logout() {
-    session.value.user = null;
+  session.value.user = null;
 }
-

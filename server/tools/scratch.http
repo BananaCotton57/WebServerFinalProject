@@ -12,8 +12,8 @@ POST http://localhost:8000/api/v1/users
 Content-Type: application/json
 
 {
-  "username": "moo",
-  "name": "Cow",
+  "username": "squeezy",
+  "name": "Orange",
   "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
   "is_administrator": false
 }

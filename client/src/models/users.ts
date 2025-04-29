@@ -1,6 +1,6 @@
 import { ref } from "vue";
-import {api} from "@/viewmodels/session"; // Ensure this file exists and contains the required data
-import rawUsers from "@/data/users.json"; // Ensure this file exists and contains the required data
+import { api } from "@/viewmodels/session"; // Import from viewmodels
+import rawUsers from "@/data/users.json"; // Local JSON data
 
 export interface User {
   id: number;
@@ -13,11 +13,21 @@ export interface User {
 // Convert the raw JSON data into a reactive ref
 export const jsonUsers = ref<User[]>(rawUsers);
 
-export function getAll(): Promise<User> {
-  return api('users');
+// This should return User[] not just User
+export function getAll(): Promise<User[]> {
+  return api<User[]>('users');
 }
 
-export const supabaseUsers = getAll();
+// Don't call the function directly here - it will execute immediately
+// and won't be reactive in components
+export const usersRef = ref<User[]>([]);
+
+export function loadUsers() {
+  return getAll().then(data => {
+    usersRef.value = data;
+    return data;
+  });
+}
 
 export function addUser(newUser: User) {
   jsonUsers.value.unshift(newUser);
@@ -26,6 +36,3 @@ export function addUser(newUser: User) {
 export function removeUser(index: number) {
   jsonUsers.value.splice(index, 1);
 }
-
-//will add other functions from server
-
