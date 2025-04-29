@@ -23,10 +23,10 @@ PATCH http://localhost:8000/api/v1/users/1
 Content-Type: application/json
 
 {
-  "name": "John Smith",
-  "username": "johnsmith",
   "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
-  "is_administrator": true
+  "name": "Arnold Schwarzenegger",
+  "username": "arnoldschwarzenegger",
+  "is_administrator": false
 }
 ###
 DELETE http://localhost:8000/api/v1/users/5
