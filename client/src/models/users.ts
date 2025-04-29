@@ -11,18 +11,20 @@ export interface User {
 }
 
 // Convert the raw JSON data into a reactive ref
-export const Users = ref<User[]>(rawUsers);
+export const jsonUsers = ref<User[]>(rawUsers);
 
-export function getAll() {
-  return api<User>('users');
+export function getAll(): Promise<User> {
+  return api('users');
 }
 
+export const supabaseUsers = getAll();
+
 export function addUser(newUser: User) {
-  Users.value.unshift(newUser);
+  jsonUsers.value.unshift(newUser);
 }
 
 export function removeUser(index: number) {
-  Users.value.splice(index, 1);
+  jsonUsers.value.splice(index, 1);
 }
 
 //will add other functions from server
