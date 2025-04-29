@@ -2,6 +2,7 @@ import { ref } from "vue";
 import rawUsers from "@/data/users.json"; // Ensure this file exists and contains the required data
 
 export interface User {
+  id: number;
   avatar: string;
   name: string;
   username: string;

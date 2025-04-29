@@ -1,5 +1,8 @@
 import { ref, computed } from "vue";
+import * as myFetch from '@/models/myFetch'
+import {type User} from "@/models/users"; // Ensure this file exists and contains the required data
 
+/*
 type User = {
     id: number,
     avatar: string,
@@ -7,6 +10,7 @@ type User = {
     username: string,
     isAdministrator: boolean
   };
+  */
   
   const session = ref<{ user: User | null }>({
     user: null,
