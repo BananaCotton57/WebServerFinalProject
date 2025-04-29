@@ -11,7 +11,7 @@ export interface User {
 }
 
 // Convert the raw JSON data into a reactive ref
-export const jsonUsers = ref<User[]>(rawUsers);
+//export const jsonUsers = ref<User[]>(rawUsers);
 
 // This should return User[] not just User
 export function getAll(): Promise<User[]> {

@@ -13,8 +13,8 @@ Content-Type: application/json
 
 {
       "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
-      "name": "Arnold Schwarzenegger",
-      "username": "arnoldschwarzenegger",
+      "name": "Apple",
+      "username": "crunchy",
       "is_administrator": false
 }
 
