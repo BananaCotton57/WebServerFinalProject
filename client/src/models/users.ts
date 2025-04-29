@@ -7,7 +7,7 @@ export interface User {
   avatar: string;
   name: string;
   username: string;
-  isAdministrator: boolean;
+  is_administrator: boolean;
 }
 
 // Convert the raw JSON data into a reactive ref
@@ -16,6 +16,10 @@ export const jsonUsers = ref<User[]>(rawUsers);
 // This should return User[] not just User
 export function getAll(): Promise<User[]> {
   return api<User[]>('users');
+}
+
+export function get(id: number): Promise<User> {
+  return api<User>(`users/${id}`);
 }
 
 // Don't call the function directly here - it will execute immediately

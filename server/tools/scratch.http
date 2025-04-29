@@ -12,8 +12,8 @@ POST http://localhost:8000/api/v1/users
 Content-Type: application/json
 
 {
-  "username": "squeezy",
-  "name": "Orange",
+  "username": "tick tock",
+  "name": "Timeless",
   "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
   "is_administrator": false
 }
@@ -26,7 +26,7 @@ Content-Type: application/json
   "name": "John Smith",
   "username": "johnsmith",
   "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
-  "is_administrator": false
+  "is_administrator": true
 }
 ###
 DELETE http://localhost:8000/api/v1/users/5

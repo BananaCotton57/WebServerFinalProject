@@ -13,7 +13,7 @@ const session = ref<{ user: User | null }>({
 
 export const refSession = () => session;
 
-export const isAdmin = computed(() => session.value.user?.isAdministrator === true);
+export const isAdmin = computed(() => session.value.user?.is_administrator === true);
 
 export function login(user: User) {
   session.value.user = user;

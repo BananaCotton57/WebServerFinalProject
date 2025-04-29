@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { refSession, isAdmin, login, logout } from '@/viewmodels/session';
 import {ref} from 'vue';
+import { loadUsers, usersRef, type User } from '@/models/users';
 import users from '@/data/users.json';
 
 const session = refSession();
