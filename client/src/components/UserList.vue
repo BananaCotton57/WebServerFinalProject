@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import users from '@/data/users.json';
 import { loadUsers, usersRef, type User } from '@/models/users';
 
 const isLoading = ref(true);
