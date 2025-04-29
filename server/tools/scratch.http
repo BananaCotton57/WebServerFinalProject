@@ -12,10 +12,10 @@ POST http://localhost:8000/api/v1/users
 Content-Type: application/json
 
 {
-  "username": "tick tock",
-  "name": "Timeless",
-  "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
-  "is_administrator": false
+      "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
+      "name": "Arnold Schwarzenegger",
+      "username": "arnoldschwarzenegger",
+      "is_administrator": false
 }
 
 ###
@@ -23,10 +23,10 @@ PATCH http://localhost:8000/api/v1/users/1
 Content-Type: application/json
 
 {
-  "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
-  "name": "Arnold Schwarzenegger",
-  "username": "arnoldschwarzenegger",
-  "is_administrator": false
+    "avatar": "https://bulma.io/assets/images/placeholders/128x128.png", 
+    "name": "John Smith", 
+    "username": "johnsmith",
+    "is_administrator": true
 }
 ###
 DELETE http://localhost:8000/api/v1/users/5
