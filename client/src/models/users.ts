@@ -13,6 +13,10 @@ export interface User {
 // Convert the raw JSON data into a reactive ref
 export const Users = ref<User[]>(rawUsers);
 
+export function getAll() {
+  return api<User>('users');
+}
+
 export function addUser(newUser: User) {
   Users.value.unshift(newUser);
 }
