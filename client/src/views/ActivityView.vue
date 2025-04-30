@@ -29,6 +29,7 @@ const addNewPost = () => {
     username: session.value.user?.username || "anonymous",
     content: newPostContent.value,
     exercise: selectedExercise.value,
+    created_at: new Date().toISOString(),
   });
 
   newPostContent.value = '';
