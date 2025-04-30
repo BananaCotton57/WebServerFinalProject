@@ -8,11 +8,11 @@ export interface Exercise {
 }
 
 export function getAll(): Promise<Exercise[]> {
-  return api<Exercise[]>('exercises');
+  return api<Exercise[]>('exerciseTypes');
 }
 
 export function get(id: number): Promise<Exercise> {
-  return api<Exercise>(`exercises/${id}`);
+  return api<Exercise>(`exerciseTypes/${id}`);
 }
 
 export const exercisesRef = ref<Exercise[]>([]);
