@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import PostList from "@/components/PostList.vue";
-import { usePostData, filteredPosts } from "@/models/postData";
+import { usePostData, filteredPosts, create } from "@/models/postData";
 import { refSession, isLoggedIn } from "@/viewmodels/session";
 const { addPost } = usePostData();
 
@@ -23,7 +23,7 @@ const addNewPost = () => {
   if (!newPostContent.value) return;
 
   addPost({
-    id: Date.now(), // Generate a unique ID based on the current timestamp
+    id: Date.now(), // Generate a unique ID based on the current timestamp ()
     avatar: session.value.user?.avatar || "https://bulma.io/assets/images/placeholders/128x128.png",
     name: session.value.user?.name || "Anonymous",
     username: session.value.user?.username || "anonymous",
