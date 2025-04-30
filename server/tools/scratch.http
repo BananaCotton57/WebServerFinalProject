@@ -12,10 +12,10 @@ POST http://localhost:8000/api/v1/users
 Content-Type: application/json
 
 {
-  "name": "Sokka",
-  "username": "sokka",
-  "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
-  "isAdministrator": false
+      "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
+      "name": "Falling Glass",
+      "username": "owie",
+      "is_administrator": true
 }
 
 ###
@@ -23,20 +23,20 @@ PATCH http://localhost:8000/api/v1/users/1
 Content-Type: application/json
 
 {
-  "name": "Jason",
-  "username": "jason",
-  "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
-  "isAdministrator": false
+    "avatar": "https://bulma.io/assets/images/placeholders/128x128.png", 
+    "name": "John Smith", 
+    "username": "johnsmith",
+    "is_administrator": true
 }
 ###
-DELETE http://localhost:8000/api/v1/users/1
+DELETE http://localhost:8000/api/v1/users/5
 Content-Type: application/json
 
 {
   "name": "Sokka",
   "username": "sokka",
   "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
-  "isAdministrator": false
+  "is_administrator": false
 }
 
 ########--Activity Controller--########
@@ -52,11 +52,10 @@ POST http://localhost:8000/api/v1/activities
 Content-Type: application/json
 
 {
-    "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
-    "name": "Harold Smith",
-    "username": "hi",
-    "content": "Kaboom batlefield",
-    "exercise": "Running"
+    "user_id": 1,
+    "exercise_id": 1,
+    "content": "Hello",
+    "created_at": "2023-10-01T00:00:00Z"
 }
 
 ###
@@ -64,15 +63,14 @@ PATCH http://localhost:8000/api/v1/activities/1
 Content-Type: application/json
 
 {
-    "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
-    "name": "Harold Parker",
-    "username": "hi",
-    "content": "Idolizer",
-    "exercise": "Running"
+    "user_id": 1,
+    "exercise_id": 7,
+    "content": "Hello",
+    "created_at": "2023-10-01T00:00:00Z"
 }
 
 ###
-DELETE http://localhost:8000/api/v1/activities/1
+DELETE http://localhost:8000/api/v1/activities/6
 
 ###
 GET http://localhost:8000/api/v1/activities/user/janedoe
@@ -85,14 +83,14 @@ GET http://localhost:8000/api/v1/activities/user/janedoe
 http://localhost:8000/api/v1/exerciseTypes
 
 ###
-GET http://localhost:8000/api/v1/exerciseTypes/1
+GET http://localhost:8000/api/v1/exerciseTypes/10
 
 ###
 POST http://localhost:8000/api/v1/exerciseTypes
 Content-Type: application/json
 
 {
-    "exercise": "ransom"
+    "exercise": "jumping jacks"
 }
 
 ###
@@ -100,8 +98,8 @@ PATCH http://localhost:8000/api/v1/exerciseTypes/1
 Content-Type: application/json
 
 {
-    "exercise": "orange"
+    "exercise": "Running"
 }
 
 ###
-DELETE http://localhost:8000/api/v1/exerciseTypes/1
+DELETE http://localhost:8000/api/v1/exerciseTypes/10

@@ -1,41 +1,35 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import users from '@/data/users.json';
+import { ref, onMounted } from 'vue';
+import { loadUsers, usersRef, type User } from '@/models/users';
 
-/*
-const users = ref([{
-  avatar: "https://bulma.io/assets/images/placeholders/128x128.png", 
-  name: "John Smith", 
-  username: "johnsmith",
-  isAdministrator: true
-},
-{ 
-  avatar: "https://bulma.io/assets/images/placeholders/128x128.png",
-  name: "Jane Doe",
-  username: "janedoe",
-  isAdministrator: false
-}]);
-*/
-//will be replaced with a fetch call to the json file (temporary database)
+const isLoading = ref(true);
+const error = ref<string | null>(null);
+
+onMounted(async () => {
+  try {
+    isLoading.value = true;
+    await loadUsers();
+    isLoading.value = false;
+  } catch (err) {
+    isLoading.value = false;
+    error.value = "Failed to load users";
+    console.error("Error loading users:", err);
+  }
+});
 
 </script>
 
 <template>
   <div>
-    <div class="buttons">
-      <button class="button is-primary">Add User</button>
-      <button class="button is-danger">Remove User</button>
-      <button class="button is-info">Edit User</button>
-    </div>
     <h2>Users</h2>
     <!-- Wrap users in a UL for proper list structure -->
     <ul>
-      <li v-for="user in users" :key="user.username" class="user-item">
+      <li v-for="user in usersRef" :key="user.username" class="user-item">
         <img :src="user.avatar" alt="Avatar" class="avatar" />
         <div class="user-info">
           <span><strong>{{ user.name }}</strong></span>
-          <span>{{ user.username }}</span>
-          <span v-if="user.isAdministrator" class="admin-tag">Administrator</span>
+          <span>Username: {{ user.username }}</span>
+          <span v-if="user.is_administrator" class="admin-tag">Administrator</span>
         </div>
       </li>
     </ul>

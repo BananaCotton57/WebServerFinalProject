@@ -1,55 +1,95 @@
-const data = require('../data/activity.json')
 const { CustomError, statusCodes } = require('./errors')
+const { connect } = require('./supabase');
 
-const isAdmin = true;
+const TABLE_NAME = 'activities';
+
+// Helper function to get the base query
+const BaseQuery = () => connect().from(TABLE_NAME);
+
+// Helper function to transform activity data into the desired format
+function transformActivityData(activity) {
+    return {
+        id: activity.id,
+        avatar: activity.users?.avatar || null, // Use null if users is null
+        name: activity.users?.name || null,
+        username: activity.users?.username || null,
+        content: activity.content,
+        exercise: activity.exercises?.exercise,
+        created_at: activity.created_at
+    };
+}
 
 async function getAll() {
-    return data
+    const { data, error } = await BaseQuery().select('*, users(username, name, avatar), exercises(exercise)');
+    
+    if (error) {
+        throw error;
+    }
+    
+    return data.map(transformActivityData);
 }
 
-async function get(id){
-    const activity = data.find((activity) => activity.id == id)
-    if (!activity) {
-        throw new CustomError('Could not find post', statusCodes.NOT_FOUND)
+async function get(id) {
+    const { data, error } = await BaseQuery().select('*, users(username, name, avatar), exercises(exercise)').eq('id', id);
+    
+    if (error) {
+        throw error;
     }
-    return activity
+    
+    if (!data.length) {
+        throw new CustomError('Could not find post', statusCodes.NOT_FOUND);
+    }
+    
+    return transformActivityData(data[0]);
 }
 
-async function create(activity){
-    const newActivity = {
-        id: data.length + 1,
-        ...activity
+async function create(activity) {
+    const { id, ...activityWithoutId } = activity;
+    
+    const { data, error } = await BaseQuery().insert(activityWithoutId).select('*, users(username, name, avatar), exercises(exercise)').eq('id', id);
+    
+    if (error) {
+        throw error;
     }
-    data.push(newActivity)
-    return newActivity
+    
+    return transformActivityData(data[0]);
 }
 
-async function update(id, activity){
-    const index = data.findIndex((activity) => activity.id == id)
-    if (index === -1) {
-        return null
+async function update(id, activity) {
+    const { data, error } = await BaseQuery().update(activity).eq('id', id).select('*, users(username, name, avatar), exercises(exercise)');
+    
+    if (error) {
+        throw error;
     }
-    const updatedActivity = {
-        ...data[index],
-        ...activity
+    
+    if (!data.length) {
+        return null;
     }
-    data[index] = updatedActivity
-    return updatedActivity
-
+    
+    return transformActivityData(data[0]);
 }
 
-async function remove(id){
-    const index = data.findIndex((activity) => activity.id == id)
-    if (index === -1) {
-        return null
+async function remove(id) {
+    const { data, error } = await BaseQuery().delete().eq('id', id).select('*, users(username, name, avatar), exercises(exercise)');
+    
+    if (error) {
+        throw error;
     }
-    const deletedActivity = data[index]
-    data.splice(index, 1)
-    return deletedActivity
+    
+    return transformActivityData(data[0]);
 }
 
 async function filterByUsername(username) {
-    return data.filter(activity => activity.username === username);
+    const { data, error } = await BaseQuery()
+        .select('*, users(username, name, avatar), exercises(exercise)')
+        .eq('users.username', username)
+        .not('users', 'is', null); // Exclude rows where the users relationship is null
+
+    if (error) {
+        throw error;
+    }
+
+    return data.map(transformActivityData);
 }
 
 module.exports = {
@@ -59,4 +99,4 @@ module.exports = {
     update,
     remove,
     filterByUsername
-}
+};

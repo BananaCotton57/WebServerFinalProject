@@ -4,10 +4,25 @@ const usersController = require('./controllers/usersController')
 const activityController = require('./controllers/activityController')
 const exerciseTypesController = require('./controllers/exerciseTypesController')
 
-const PORT = 8000
+require('dotenv').config() // Load environment variables from .env file
+
+console.log('SUPABASE_URL:', process.env.SUPABASE_URL); //debug
+console.log('SUPABASE_SECRET_KEY:', process.env.SUPABASE_SECRET_KEY); //debug
+
+const PORT = process.env.PORT ?? 8000
 
 const app = express();
-  app.use(express.json()) 
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200)
+  }
+  next()
+})
+  app.use(express.json())
 
 //Controllers
 //A controller is a function that handles the request and response objects.

@@ -4,14 +4,14 @@
     "avatar": "https://bulma.io/assets/images/placeholders/128x128.png", 
     "name": "John Smith", 
     "username": "johnsmith",
-    "isAdministrator": true
+    "is_administrator": true
   },
   { 
     "id": 2,
     "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
     "name": "Jane Doe",
     "username": "janedoe",
-    "isAdministrator": false
+    "is_administrator": false
   }
 ]
   
