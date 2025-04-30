@@ -11,7 +11,7 @@ defineProps<{
 
 <template>
   <div>
-    <div v-for="(post, index) in [...posts].reverse()" :key="index" class="box">
+    <div v-for="(post, index) in posts" :key="index" class="box">
       <article class="media">
         <div class="media-left">
           <figure class="image is-64x64">
