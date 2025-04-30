@@ -13,6 +13,23 @@ export interface Post {
   created_at: string;
 }
 
+export function getAll(): Promise<Post[]> {
+  return api<Post[]>('activities');
+}
+
+export function get(id: number): Promise<Post> {
+  return api<Post>(`exerciseTypes/${id}`);
+}
+
+export const postsRef = ref<Post[]>([]);
+
+export function loadPosts() {
+  return getAll().then(data => {
+    postsRef.value = data;
+    return data;
+  });
+}
+
 // Convert the raw JSON data into a reactive ref
 export const posts = ref<Post[]>(rawPosts);
 
