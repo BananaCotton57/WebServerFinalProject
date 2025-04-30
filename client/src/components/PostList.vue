@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { usePostData, type Post } from "@/models/postData";
+import{ref, onMounted} from 'vue';
+import { usePostData, loadPosts, postsRef, type Post } from "@/models/postData";
 import { removePost } from "@/models/postData";
 
 defineProps<{
@@ -7,11 +8,26 @@ defineProps<{
   allowRemove: boolean,
 }>();
 
+const isLoading = ref(true);
+const error = ref<string | null>(null);
+
+onMounted(async () => { //im copying all of the isLoading and error a lot. I should probably make a function for this
+  try {
+    isLoading.value = true;
+    await loadPosts();
+    isLoading.value = false;
+  } catch (err) {
+    isLoading.value = false;
+    error.value = "Failed to load posts";
+    console.error("Error loading posts:", err);
+  }
+});
+
 </script>
 
 <template>
   <div>
-    <div v-for="(post, index) in posts" :key="index" class="box">
+    <div v-for="(post, index) in postsRef" :key="index" class="box">
       <article class="media">
         <div class="media-left">
           <figure class="image is-64x64">
