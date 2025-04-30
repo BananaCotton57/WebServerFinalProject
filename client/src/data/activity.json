@@ -5,7 +5,8 @@
       "name": "John Smith",
       "username": "johnsmith",
       "content": "Running around Town!",
-      "exercise": "Running"
+      "exercise": "Running",
+      "created_at": "string"
     },
     {
       "id": 2,
@@ -13,7 +14,8 @@
       "name": "Jane Doe",
       "username": "janedoe",
       "content": "Nullam condimentum luctus turpis. Curabitur scelerisque libero ac sapien dignissim hendrerit.",
-      "exercise": "Cycling"
+      "exercise": "Cycling",
+      "created_at": "string"
     },
     {
       "id": 3,
@@ -21,7 +23,8 @@
       "name": "Jane Doe",
       "username": "janedoe",
       "content": "Crystallize.",
-      "exercise": "Swimming"
+      "exercise": "Swimming",
+      "created_at": "string"
     }
     ,
     {
@@ -30,6 +33,7 @@
       "name": "Arnold Schwarzenegger",
       "username": "arnoldschwarzenegger",
       "content": "Walking around Town!",
-      "exercise": "Walking"
+      "exercise": "Walking",
+      "created_at": "string"
     }
   ]
