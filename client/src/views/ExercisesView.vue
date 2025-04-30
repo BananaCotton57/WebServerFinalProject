@@ -26,8 +26,6 @@ onMounted(async () => {
   <div>
     <div class="buttons">
         <button class="button is-primary">Add Exercise</button>
-        <button class="button is-danger">Remove Exercise</button>
-        <button class="button is-info">Edit Exercise</button>
     </div>
     
     <ExerciseList />

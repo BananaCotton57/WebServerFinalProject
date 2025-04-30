@@ -65,10 +65,7 @@ const addNewPost = () => {
               <label class="label">Exercise Type</label>
               <div class="control">
                 <select v-model="selectedExercise">
-                  <option>Running</option>
-                  <option>Cycling</option>
-                  <option>Swimming</option>
-                  <option>Walking</option>
+                  <!--<ExerciseList />-->
                 </select>
               </div>
             </div>

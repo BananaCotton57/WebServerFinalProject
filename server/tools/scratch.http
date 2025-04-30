@@ -90,7 +90,7 @@ POST http://localhost:8000/api/v1/exerciseTypes
 Content-Type: application/json
 
 {
-    "exercise": "jumping jacks"
+    "exercise": "stuff"
 }
 
 ###
