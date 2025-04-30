@@ -15,6 +15,18 @@ export function get(id: number): Promise<Exercise> {
   return api<Exercise>(`exerciseTypes/${id}`);
 }
 
+export function create(data: Exercise) {
+  return api<Exercise>('exerciseTypes', data)
+}
+
+export function update(id: number, data: Exercise) {
+  return api<Exercise>(`exerciseTypes/${id}`, data, 'PATCH')
+}
+
+export function remove(id: number) {
+  return api<Exercise>(`exerciseTypes/${id}`, undefined, 'DELETE')
+}
+
 export const exercisesRef = ref<Exercise[]>([]);
 
 export function loadExercises() {

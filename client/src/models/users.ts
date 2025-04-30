@@ -22,6 +22,18 @@ export function get(id: number): Promise<User> {
   return api<User>(`users/${id}`);
 }
 
+export function create(data: User) {
+  return api<User>('users', data)
+}
+
+export function update(id: number, data: User) {
+  return api<User>(`users/${id}`, data, 'PATCH')
+}
+
+export function remove(id: number) {
+  return api<User>(`users/${id}`, undefined, 'DELETE')
+}
+
 // Don't call the function directly here - it will execute immediately
 // and won't be reactive in components
 export const usersRef = ref<User[]>([]);

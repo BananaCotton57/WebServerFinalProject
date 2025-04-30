@@ -18,7 +18,19 @@ export function getAll(): Promise<Post[]> {
 }
 
 export function get(id: number): Promise<Post> {
-  return api<Post>(`exerciseTypes/${id}`);
+  return api<Post>(`activities/${id}`);
+}
+
+export function create(data: Post) {
+  return api<Post>('activities', data)
+}
+
+export function update(id: number, data: Post) {
+  return api<Post>(`activities/${id}`, data, 'PATCH')
+}
+
+export function remove(id: number) {
+  return api<Post>(`activities/${id}`, undefined, 'DELETE')
 }
 
 export const postsRef = ref<Post[]>([]);
