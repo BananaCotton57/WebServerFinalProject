@@ -1,5 +1,6 @@
 import { ref, computed } from "vue";
 import { refSession } from "@/viewmodels/session";
+import { api } from "@/viewmodels/session";
 import rawPosts from "@/data/activity.json";
 
 export interface Post {
