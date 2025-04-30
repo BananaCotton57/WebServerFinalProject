@@ -13,9 +13,9 @@ Content-Type: application/json
 
 {
       "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
-      "name": "Apple",
-      "username": "crunchy",
-      "is_administrator": false
+      "name": "Falling Glass",
+      "username": "owie",
+      "is_administrator": true
 }
 
 ###
