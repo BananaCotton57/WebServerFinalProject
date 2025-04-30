@@ -42,7 +42,7 @@ export function loadPosts() {
   });
 }
 
-// Convert the raw JSON data into a reactive ref
+// Convert the raw JSON data into a reactive ref (everything below this line is the same json stuff)
 export const posts = ref<Post[]>(rawPosts);
 
 // Add/remove logic stays the same
