@@ -70,7 +70,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8000/api/v1/activities/4
+DELETE http://localhost:8000/api/v1/activities/6
 
 ###
 GET http://localhost:8000/api/v1/activities/user/janedoe

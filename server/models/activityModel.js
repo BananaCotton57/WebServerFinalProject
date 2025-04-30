@@ -14,13 +14,13 @@ function transformActivityData(activity) {
         name: activity.users?.name || null,
         username: activity.users?.username || null,
         content: activity.content,
-        exercise: activity.exercise_id, // Replace with actual exercise name if needed
+        exercise: activity.exercises?.exercise,
         created_at: activity.created_at
     };
 }
 
 async function getAll() {
-    const { data, error } = await BaseQuery().select('*, users(username, name, avatar)');
+    const { data, error } = await BaseQuery().select('*, users(username, name, avatar), exercises(exercise)');
     
     if (error) {
         throw error;
@@ -30,7 +30,7 @@ async function getAll() {
 }
 
 async function get(id) {
-    const { data, error } = await BaseQuery().select('*, users(username, name, avatar)').eq('id', id);
+    const { data, error } = await BaseQuery().select('*, users(username, name, avatar), exercises(exercise)').eq('id', id);
     
     if (error) {
         throw error;
@@ -46,7 +46,7 @@ async function get(id) {
 async function create(activity) {
     const { id, ...activityWithoutId } = activity;
     
-    const { data, error } = await BaseQuery().insert(activityWithoutId).select('*, users(username, name, avatar)');
+    const { data, error } = await BaseQuery().insert(activityWithoutId).select('*, users(username, name, avatar), exercises(exercise)').eq('id', id);
     
     if (error) {
         throw error;
@@ -56,7 +56,7 @@ async function create(activity) {
 }
 
 async function update(id, activity) {
-    const { data, error } = await BaseQuery().update(activity).eq('id', id).select('*, users(username, name, avatar)');
+    const { data, error } = await BaseQuery().update(activity).eq('id', id).select('*, users(username, name, avatar), exercises(exercise)');
     
     if (error) {
         throw error;
@@ -70,7 +70,7 @@ async function update(id, activity) {
 }
 
 async function remove(id) {
-    const { data, error } = await BaseQuery().delete().eq('id', id).select('*, users(username, name, avatar)');
+    const { data, error } = await BaseQuery().delete().eq('id', id).select('*, users(username, name, avatar), exercises(exercise)');
     
     if (error) {
         throw error;
@@ -81,7 +81,7 @@ async function remove(id) {
 
 async function filterByUsername(username) {
     const { data, error } = await BaseQuery()
-        .select('*, users(username, name, avatar)')
+        .select('*, users(username, name, avatar), exercises(exercise)')
         .eq('users.username', username)
         .not('users', 'is', null); // Exclude rows where the users relationship is null
 
