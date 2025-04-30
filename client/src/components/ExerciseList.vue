@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import exercises from '@/data/exercises.json';
+//import exercises from '@/data/exercises.json';
 import { ref, onMounted } from 'vue';
 import { loadExercises, exercisesRef, type Exercise } from '@/models/exercises';
 
@@ -24,8 +24,8 @@ onMounted(async () => { //im copying all of the isLoading and error a lot. I sho
         <h2>Exercises</h2>
         <!-- Wrap exercises in a UL for proper list structure -->
         <ul>
-            <li v-for="exercise in exercisesRef" :key="exercise.id" class="exercise-item">
-                <span>{{exercise.exercise}}</span>
+            <li v-for="x in exercisesRef" :key="x.id" class="exercise-item">
+                <span>{{x.exercise}}</span>
             </li>
         </ul>
     </div>

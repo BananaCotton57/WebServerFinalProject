@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import rawExercises from "@/data/users.json"; // Ensure this file exists and contains the required data
+//import rawExercises from "@/data/users.json"; // Ensure this file exists and contains the required data
 import { api } from "@/viewmodels/session";
 
 export interface Exercise {
