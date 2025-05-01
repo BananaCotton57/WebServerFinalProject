@@ -6,9 +6,6 @@ const exerciseTypesController = require('./controllers/exerciseTypesController')
 
 require('dotenv').config() // Load environment variables from .env file
 
-console.log('SUPABASE_URL:', process.env.SUPABASE_URL); //debug
-console.log('SUPABASE_SECRET_KEY:', process.env.SUPABASE_SECRET_KEY); //debug
-
 const PORT = process.env.PORT ?? 8000
 
 const app = express();
