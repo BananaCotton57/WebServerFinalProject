@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import{ref, onMounted} from 'vue';
-import { usePostData, loadPosts, postsRef, remove, type Post } from "@/models/postData";
+import { loadPosts, postsRef, remove, type Post } from "@/models/postData";
 import { removePost } from "@/models/postData";
 
 defineProps<{
@@ -33,7 +33,11 @@ const handleRemove = async (post: Post) => {
     }
     
     // Then call the API to remove the post on the server
-    await remove(post.id);
+    if (post.id !== undefined) {
+      await remove(post.id);
+    } else {
+      console.error("Post ID is undefined, cannot remove post.");
+    }
   } catch (err) {
     console.error("Error removing post:", err);
     error.value = "Failed to remove post";

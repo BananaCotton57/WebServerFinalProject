@@ -3,15 +3,7 @@ import { ref } from "vue";
 import { usePostData } from "@/models/postData";
 import PostList from "@/components/PostList.vue";
 
-const { posts, addPost } = usePostData();
-const isModalActive = ref(false);
-const newPostContent = ref('');
-const selectedExercise = ref('Running');
-
-const toggleModal = () => {
-  isModalActive.value = !isModalActive.value;
-};
-
+const posts = ref([]); // Initialize posts as an empty array or with appropriate data
 </script>
 
 <template>
