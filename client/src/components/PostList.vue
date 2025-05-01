@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import{ref, onMounted} from 'vue';
 import { loadPosts, postsRef, remove, type Post } from "@/models/postData";
-import { removePost } from "@/models/postData";
 
 defineProps<{
   posts: Post[],
