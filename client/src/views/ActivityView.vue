@@ -2,7 +2,7 @@
 import { ref, onMounted } from "vue";
 import PostList from "@/components/PostList.vue";
 import { filteredPosts, create, loadPosts, postsRef } from "@/models/postData";
-import { exercisesRef } from "@/models/exercises";
+import { exercisesRef, loadExercises } from "@/models/exercises";
 import { refSession, isLoggedIn } from "@/viewmodels/session";
 
 const isModalActive = ref(false);
@@ -12,6 +12,14 @@ const isLoading = ref(false);
 const error = ref<string | null>(null);
 
 const session = refSession();
+
+onMounted(async () => {
+  try {
+    await loadExercises();
+  } catch (err) {
+    console.error("Error loading exercises:", err);
+  }
+});
 
 // Load posts when component mounts
 onMounted(async () => {
