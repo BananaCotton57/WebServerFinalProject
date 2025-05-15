@@ -62,4 +62,23 @@ async function remove(id) {
     return data[0];
 }
 
-module.exports = { getAll, get, create, update, remove };
+async function searchByName(searchTerm, limit = 10) {
+  if (!searchTerm || searchTerm.trim() === '') {
+    // Optional: return empty array or maybe a small default list
+    return [];
+  }
+
+  const { data, error } = await BaseQuery()
+    .select('id, name, username')    // select only fields needed for autocomplete
+    .ilike('name', `%${searchTerm}%`) // partial, case-insensitive match
+    .limit(limit);
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
+
+module.exports = { getAll, get, create, update, remove, searchByName };

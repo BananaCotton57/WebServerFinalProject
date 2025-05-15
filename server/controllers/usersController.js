@@ -42,5 +42,11 @@ router
             res.send(data)
         }).catch(next)
     })
+    .get('/search/:name', (req, res, next) => {
+        const { name } = req.params;
+        model.searchByName(name)
+            .then(data => res.send(data))
+            .catch(next);
+    });
 
 module.exports = router

@@ -13,8 +13,8 @@ Content-Type: application/json
 
 {
       "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
-      "name": "capy Glass",
-      "username": "banana",
+      "name": "Charles",
+      "username": "ok",
       "is_administrator": false
 }
 
@@ -38,6 +38,9 @@ Content-Type: application/json
   "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
   "is_administrator": false
 }
+
+###
+GET http://localhost:8000/api/v1/users/search/as
 
 ########--Activity Controller--########
 

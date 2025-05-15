@@ -34,6 +34,9 @@ export function remove(id: number) {
   return api<User>(`users/${id}`, undefined, 'DELETE')
 }
 
+export function getByUsername(username: string): Promise<User> {
+  return api<User>(`users/username/${username}`);
+}
 // Don't call the function directly here - it will execute immediately
 // and won't be reactive in components
 export const usersRef = ref<User[]>([]);
