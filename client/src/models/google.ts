@@ -20,3 +20,5 @@ export async function askGemini(prompt: string): Promise<string> {
 
     return response?.results?.[0]?.contents?.[0]?.parts?.[0]?.text ?? ''
 }
+
+//not using this right now
