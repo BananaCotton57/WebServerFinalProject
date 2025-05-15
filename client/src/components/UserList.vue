@@ -51,6 +51,18 @@ const filteredUsers = computed(() => {
   return usersRef.value.filter(user => user.name === selected.value);
 });
 
+// Function to get async data based on the selected option
+const getAsyncData = async (value: string) => {
+  try {
+    // Call the search function with the selected value
+    const results = await searchUsers(value);
+    // Update the options with the results
+    options.value = results.map(user => user.name);
+  } catch (err) {
+    console.error("Error searching users:", err);
+  }
+};
+
 </script>
 
 <template>
@@ -63,6 +75,7 @@ const filteredUsers = computed(() => {
         <o-autocomplete
             v-model="selected"
             :options="options"
+             @input="getAsyncData"
             placeholder="Find a name..."
             open-on-focus>
         </o-autocomplete>
