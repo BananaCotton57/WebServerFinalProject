@@ -22,6 +22,10 @@ export function get(id: number): Promise<User> {
   return api<User>(`users/${id}`);
 }
 
+export function getByUsername(username: string): Promise<User> {
+  return api<User>(`users/username/${username}`);
+}
+
 export function create(data: User) {
   return api<User>('users', data)
 }
@@ -34,9 +38,10 @@ export function remove(id: number) {
   return api<User>(`users/${id}`, undefined, 'DELETE')
 }
 
-export function getByUsername(username: string): Promise<User> {
-  return api<User>(`users/username/${username}`);
+export function searchUsers(query: string): Promise<User[]> {
+  return api<User[]>(`users/search/${query}`);
 }
+
 // Don't call the function directly here - it will execute immediately
 // and won't be reactive in components
 export const usersRef = ref<User[]>([]);

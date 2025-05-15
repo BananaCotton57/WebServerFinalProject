@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
-import { loadUsers, usersRef, remove, type User } from '@/models/users';
+import { loadUsers, usersRef, remove, searchUsers, type User } from '@/models/users';
 
 const isLoading = ref(true);
 const error = ref<string | null>(null);
