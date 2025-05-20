@@ -3,13 +3,22 @@ import { refSession } from "@/viewmodels/session";
 import { api } from "@/viewmodels/session";
 import rawPosts from "@/data/activity.json";
 
+// The Post interface as returned by the API (after transformation)
 export interface Post {
-  id: number;
+  id?: number;
   avatar: string;
   name: string;
   username: string;
   content: string;
-  exercise: string; // Adjust based on whether exercise is a name or ID
+  exercise: string;
+  created_at: string;
+}
+
+// The payload needed to create a new post (what the backend expects)
+export interface PostCreatePayload {
+  user_id: number;
+  exercise_id: number;
+  content: string;
   created_at: string;
 }
 
@@ -21,16 +30,16 @@ export function get(id: number): Promise<Post> {
   return api<Post>(`activities/${id}`);
 }
 
-export function create(data: Post) {
-  return api<Post>('activities', data)
+export function create(data: PostCreatePayload): Promise<Post> {
+  return api<Post>('activities', data);
 }
 
-export function update(id: number, data: Post) {
-  return api<Post>(`activities/${id}`, data, 'PATCH')
+export function update(id: number, data: Partial<Post>): Promise<Post> {
+  return api<Post>(`activities/${id}`, data, 'PATCH');
 }
 
-export function remove(id: number) {
-  return api<Post>(`activities/${id}`, undefined, 'DELETE')
+export function remove(id: number): Promise<Post> {
+  return api<Post>(`activities/${id}`, undefined, 'DELETE');
 }
 
 export const postsRef = ref<Post[]>([]);
@@ -42,10 +51,10 @@ export function loadPosts() {
   });
 }
 
-// Convert the raw JSON data into a reactive ref
+// Convert the raw JSON data into a reactive ref (for offline/demo mode)
 export const posts = ref<Post[]>(rawPosts);
 
-// Add/remove logic stays the same
+// Add/remove logic for local JSON data
 export function addPost(newPost: Post) {
   posts.value.unshift(newPost);
 }
@@ -67,4 +76,3 @@ export function usePostData() {
     removePost,
   };
 }
-

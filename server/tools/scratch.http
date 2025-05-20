@@ -13,9 +13,9 @@ Content-Type: application/json
 
 {
       "avatar": "https://bulma.io/assets/images/placeholders/128x128.png",
-      "name": "Falling Glass",
-      "username": "owie",
-      "is_administrator": true
+      "name": "Charles",
+      "username": "ok",
+      "is_administrator": false
 }
 
 ###
@@ -39,6 +39,9 @@ Content-Type: application/json
   "is_administrator": false
 }
 
+###
+GET http://localhost:8000/api/v1/users/search/as
+
 ########--Activity Controller--########
 
 ###
@@ -53,8 +56,8 @@ Content-Type: application/json
 
 {
     "user_id": 1,
-    "exercise_id": 1,
-    "content": "Hello",
+    "exercise_id": 3,
+    "content": "Im running",
     "created_at": "2023-10-01T00:00:00Z"
 }
 
@@ -70,7 +73,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8000/api/v1/activities/6
+DELETE http://localhost:8000/api/v1/activities/7
 
 ###
 GET http://localhost:8000/api/v1/activities/user/janedoe
@@ -90,7 +93,7 @@ POST http://localhost:8000/api/v1/exerciseTypes
 Content-Type: application/json
 
 {
-    "exercise": "jumping jacks"
+    "exercise": "stuff"
 }
 
 ###

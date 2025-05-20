@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import{ref, onMounted} from 'vue';
-import { usePostData, loadPosts, postsRef, type Post } from "@/models/postData";
-import { removePost } from "@/models/postData";
+import { loadPosts, postsRef, remove, type Post } from "@/models/postData";
 
 defineProps<{
   posts: Post[],
@@ -23,11 +22,35 @@ onMounted(async () => { //im copying all of the isLoading and error a lot. I sho
   }
 });
 
+// Add a function to handle post removal
+const handleRemove = async (post: Post) => {
+  try {
+    // First remove from local array for immediate UI update
+    const index = postsRef.value.findIndex(p => p.id === post.id);
+    if (index !== -1) {
+      postsRef.value.splice(index, 1);
+    }
+    
+    // Then call the API to remove the post on the server
+    if (post.id !== undefined) {
+      await remove(post.id);
+    } else {
+      console.error("Post ID is undefined, cannot remove post.");
+    }
+  } catch (err) {
+    console.error("Error removing post:", err);
+    error.value = "Failed to remove post";
+    
+    // If API call fails, add the post back to the array
+    loadPosts(); // Reload posts from server to restore state
+  }
+};
+
 </script>
 
 <template>
   <div>
-    <div v-for="(post, index) in postsRef" :key="index" class="box">
+    <div v-for="post in postsRef" :key="post.id" class="box">
       <article class="media">
         <div class="media-left">
           <figure class="image is-64x64">
@@ -61,7 +84,7 @@ onMounted(async () => { //im copying all of the isLoading and error a lot. I sho
                 </span>
               </a>
               <!-- Only show remove button if allowRemove is true -->
-              <a v-if="allowRemove" class="level-item" @click="removePost(posts.length - 1 - index)">
+              <a v-if="allowRemove" class="level-item" @click="handleRemove(post)">
                 <span class="icon is-small">
                   <i class="fas fa-trash" aria-hidden="true"></i>
                 </span>

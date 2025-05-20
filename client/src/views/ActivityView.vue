@@ -1,54 +1,100 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import PostList from "@/components/PostList.vue";
-import { usePostData, filteredPosts } from "@/models/postData";
+import { filteredPosts, create, loadPosts, postsRef } from "@/models/postData";
+import { exercisesRef, loadExercises } from "@/models/exercises";
 import { refSession, isLoggedIn } from "@/viewmodels/session";
-const { addPost } = usePostData();
 
 const isModalActive = ref(false);
 const newPostContent = ref('');
-const selectedExercise = ref('Running');
+const selectedExerciseId = ref(1); // Store the exercise ID, not the name
+const isLoading = ref(false);
+const error = ref<string | null>(null);
 
 const session = refSession();
+
+onMounted(async () => {
+  try {
+    await loadExercises();
+  } catch (err) {
+    console.error("Error loading exercises:", err);
+  }
+});
+
+// Load posts when component mounts
+onMounted(async () => {
+  try {
+    await loadPosts();
+  } catch (err) {
+    console.error("Error loading posts:", err);
+  }
+});
 
 const toggleModal = () => {
   isModalActive.value = !isModalActive.value;
 };
 
-const addNewPost = () => {
+const addNewPost = async () => {
   if (!isLoggedIn()) {
     alert("You must be logged in to add a post.");
     return;
   }
-  if (!newPostContent.value) return;
+  
+  if (!newPostContent.value) {
+    alert("Post content cannot be empty.");
+    return;
+  }
 
-  addPost({
-    id: Date.now(), // Generate a unique ID based on the current timestamp
-    avatar: session.value.user?.avatar || "https://bulma.io/assets/images/placeholders/128x128.png",
-    name: session.value.user?.name || "Anonymous",
-    username: session.value.user?.username || "anonymous",
-    content: newPostContent.value,
-    exercise: selectedExercise.value,
-    created_at: new Date().toISOString(),
-  });
+  isLoading.value = true;
+  error.value = null;
+  
+  try {
+    // Create post payload according to the backend API requirements
+    if (!session.value.user?.id) {
+      throw new Error("User ID is undefined. Please ensure the user is logged in.");
+    }
 
-  newPostContent.value = '';
-  selectedExercise.value = 'Running';
-  toggleModal();
+    const newPostPayload = {
+      user_id: session.value.user.id, // This should be the user's ID
+      exercise_id: selectedExerciseId.value, // The ID of the selected exercise
+      content: newPostContent.value,
+      created_at: new Date().toISOString()
+    };
+    
+    // Send post to the server
+    const createdPost = await create(newPostPayload);
+    
+    // Reload all posts to get the updated list including our new post
+    await loadPosts();
+    
+    // Reset form and close modal
+    newPostContent.value = '';
+    selectedExerciseId.value = 1;
+    toggleModal();
+  } catch (err) {
+    console.error("Failed to add post:", err);
+    error.value = "Failed to add post. Please try again.";
+  } finally {
+    isLoading.value = false;
+  }
 };
-
-
-
-// Removed conflicting local ref function declaration
 </script>
 
 <template>
   <div>
-    <button class="button is-primary" v-if="isLoggedIn()" @click="toggleModal">Add Post</button>
-    <h1>Activity Feed</h1>
-    <!-- Directly pass the computed property (no .value needed in the template) -->
+    <button class="button is-primary" v-if="isLoggedIn() && !isLoading" @click="toggleModal">Add Post</button>
+    <button class="button is-primary is-loading" v-else-if="isLoading">Adding Post...</button>
+    
+    <h1 class="title mt-4">Activity Feed</h1>
+    
+    <div v-if="error" class="notification is-danger">
+      {{ error }}
+    </div>
+    
+    <!-- Display posts -->
     <PostList :posts="filteredPosts" :allow-remove="true" />
-
+    
+    <!-- Add Post Modal -->
     <div class="modal" :class="{'is-active': isModalActive}">
       <div class="modal-background" @click="toggleModal"></div>
       <div class="modal-content">
@@ -64,16 +110,24 @@ const addNewPost = () => {
             <div class="field">
               <label class="label">Exercise Type</label>
               <div class="control">
-                <select v-model="selectedExercise">
-                  <option>Running</option>
-                  <option>Cycling</option>
-                  <option>Swimming</option>
-                  <option>Walking</option>
-                </select>
+                <div class="select">
+                  <select v-model="selectedExerciseId">
+                    <option v-for="exercise in exercisesRef" :key="exercise.id" :value="exercise.id">
+                      {{ exercise.exercise }}
+                    </option>
+                  </select>
+                </div>
               </div>
             </div>
-            <div class="field">
-              <button type="submit" class="button is-primary">Submit Post</button>
+            <div class="field is-grouped">
+              <div class="control">
+                <button type="submit" class="button is-primary" :class="{'is-loading': isLoading}" :disabled="isLoading">
+                  Submit Post
+                </button>
+              </div>
+              <div class="control">
+                <button type="button" class="button" @click="toggleModal">Cancel</button>
+              </div>
             </div>
           </form>
         </div>
@@ -82,6 +136,3 @@ const addNewPost = () => {
     </div>
   </div>
 </template>
-
-
-
